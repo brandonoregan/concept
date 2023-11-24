@@ -1,0 +1,38 @@
+{% load static %}
+
+<div> 
+    <!--TODO Add "caroursel" back to ride 
+    id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride=""-->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <!-- Slide One -->
+        <div class="row d-flex">
+            <!-- Left container -->
+            <div class="col marketBannerLeft">
+                <h3>Why?</h3>
+                <p>Use social proof pressure and the vehicle to improve you're learning.</p>
+            </div>
+            <!-- Right container -->
+            <div class="col marketBannerRight">
+                <img src="{% static 'images/brain_logo_small.png' %}" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        </div>
+      <!-- Slide Two -->
+      <div class="carousel-item">
+        <img src="{% static 'images/brain_logo_small.png' %}" class="d-block w-100" alt="...">
+      </div>
+      <!-- Slide Three -->
+      <div class="carousel-item">
+        <img src="{% static 'images/brain_logo_small.png' %}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+</div>

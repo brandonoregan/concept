@@ -8,13 +8,16 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
-# from apps.profiles.models import Profile #TODO 
+
+# from apps.profiles.models import Profile #TODO
 
 # Create your views here.
+
 
 # View for initial website page
 def welcome(request):
     return render(request, "users/welcome.html")
+
 
 class LoginUser(SuccessMessageMixin, LoginView):
     template_name = "users/login_user.html"

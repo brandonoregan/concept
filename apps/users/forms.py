@@ -7,7 +7,6 @@ from .models import CustomUser
 
 # Create a user creation form to keep crsipy form code in forms.py
 class CreateUser(UserCreationForm):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()

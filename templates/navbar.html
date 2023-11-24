@@ -1,6 +1,11 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+{% load static %}
+
+<nav class="navbar navbar-expand-md bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'welcome' %}">Concept</a>
+          <div class="navLogo">
+            <img  src="{% static 'images/brain_logo_small.png' %}" alt="Concept logo">
+          </div>
+          <a class="navbar-brand" href="{% url 'welcome' %}">CONCEPT</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,3 +36,5 @@
       </div>
     </div>
   </nav>
+
+  

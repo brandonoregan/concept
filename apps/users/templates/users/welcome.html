@@ -1,14 +1,55 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
     Welcome
 {% endblock %}
 
 {% block head %}
-
+    <!-- CSS link -->
+    <link rel="stylesheet" type="text/css" href="{% static 'users/welcome.css' %}">
 {% endblock %}
 
 
 {% block content %}
-    <h1>Welcome to Concept!</h1>
+    <div class="container">
+        <!-- Landing Page -->
+        <div class="row banner welcomeBanner">
+            <div class="col pt-3">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <div class="brainContainer">
+                            <img src="{% static 'images/welcome_brain.png' %}" alt="Brain outline">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col text-center">
+                        <h1>CONCEPT</h1>
+                        <h2>Improve you're learning ability</h1>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col signupButtonCol">
+                        <div class="button btn btn-primary ms-auto">
+                            Signup
+                        </div>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <!-- Marketing Slider -->
+        <div class="row banner marketBanner">
+            <div class="col">
+                {% include 'users/includes/carousel.html' %}
+            </div>
+        </div>
+        <!-- Reviews Slider -->
+        <div class="row banner">
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
