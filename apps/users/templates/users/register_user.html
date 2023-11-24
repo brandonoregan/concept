@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+        <div class="container d-flex justify-content-center ">
+            <h3>Register</h3>
+            {% crispy form %}
+        </div>
+{% endblock %}

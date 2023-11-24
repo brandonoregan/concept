@@ -132,3 +132,27 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+AUTH_USER_MODEL = (
+    "users.CustomUser"  # New user model for project, consequence of CustomUser model
+)
+
+LOGIN_URL = "login_user"  # Successful login redirection needs to be changed or else is will automatically redirect to accounts/login/
+
+LOGIN_REDIRECT_URL = "welcome"  # Successful login refirection needs to be changed or else is will automatically redirect to accounts/login/
+
+LOGOUT_REDIRECT_URL = "welcome"  # Replace with the desired URL
+
+
+# Email password recovery
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "brandonscodestuff@gmail.com"
+EMAIL_HOST_PASSWORD = "oybh upge pvvv iwjf"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+# This tells django to look in the given path in the base directory for the path given in the upload_to= in the models definition
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "user-media/"
