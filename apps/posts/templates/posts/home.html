@@ -13,22 +13,22 @@
 {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <div class="col">
-            <h1>See if you can understand some of these concepts</h1>
+    <div class="container homeContainer">
+        <div class="row">
+            <div class="col text-center">
+                <h1>See if you can understand some of these concepts</h1>
+                <form action="{% url 'post_create' %}" method="get" class="ms-auto me-auto">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-primary">Create post</button>
+                </form>
+            </div>
         </div>
-    </div>
-    <form action="{% url 'post_create' %}" method="get" class="">
-        {% csrf_token %}
-        <button class="btn btn-outline-primary">Create post</button>
-    </form>
-    <!-- SLider utilizing root-dir script -->
-    <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
-        {% include "posts/includes/post_slider.html" %}
-    </div>
-
-
-    <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
-        {% include "posts/includes/post_slider2.html" %}
+        <!-- SLider utilizing root-dir script -->
+        <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
+            {% include "posts/includes/post_slider.html" %}
+        </div>
+        <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
+            {% include "posts/includes/post_slider2.html" %}
+        </div>
     </div>
 {% endblock %}
