@@ -37,6 +37,7 @@ const config = {
     ]
 }
 
+
 // Async function for generating webGL waves
 const createWave = async function(selector, colors) {      
     if(document.querySelectorAll(selector) !== null && document.querySelectorAll(selector).length > 0) {

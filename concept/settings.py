@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "apps.posts",
     "apps.users",
     "bootstrap5",
     "crispy_forms",
