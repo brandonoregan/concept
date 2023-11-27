@@ -13,15 +13,19 @@
 {% endblock %}
 
 {% block content %}
+    <div class="row">
+        <div class="col">
+            <h1>See if you can understand some of these concepts</h1>
+        </div>
+    </div>
+
+    <!-- SLider utilizing root-dir script -->
     <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
         {% include "posts/includes/post_slider.html" %}
     </div>
 
+
     <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
         {% include "posts/includes/post_slider2.html" %}
-    </div>
-
-    <div class="apples">
-        <h1 class="marbles">Hey there</h1>
     </div>
 {% endblock %}

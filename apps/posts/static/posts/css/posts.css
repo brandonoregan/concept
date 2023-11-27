@@ -1,7 +1,13 @@
 .postBanner {
-    border: 2px solid black;
     height: 25rem;
     overflow: hidden;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mostRecentTitle2 {
+    align-self: flex-end;
 }
 
 
@@ -95,23 +101,4 @@
     letter-spacing: 0;
     box-sizing: border-box;
     font-weight: 400;
-}
-.icon {
-    font-size: 1rem;
-    line-height: 1rem;
-    display: block;
-    padding: 0 0 0.5rem 0;
-}
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-h1 {
-    font-size: 2.5rem;
-    color: black;
-    margin: 0;
-    font-weight: 600;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    font-family: var(--bs-body-font-family);
 }
