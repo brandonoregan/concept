@@ -1,19 +1,27 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
 
 {% endblock %}
 
 {% block head %}
-
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/posts.css' %}">
+    <!-- JavaScript link -->
+    <script type="module" src="{% static 'posts/js/posts.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-    <div class="banner reviewsBanner d-flex justify-content-center align-items-center flex-column">
+    <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
         {% include "posts/includes/post_slider.html" %}
     </div>
-    
-    <div class="banner reviewsBanner d-flex justify-content-center align-items-center flex-column">
-        {% include "posts/includes/post_slider.html" %}
+
+    <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
+        {% include "posts/includes/post_slider2.html" %}
+    </div>
+
+    <div class="apples">
+        <h1 class="marbles">Hey there</h1>
     </div>
 {% endblock %}

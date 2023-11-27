@@ -1,107 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Poppins&display=swap");
-
-:root {
-
-    /* Custom colours */
-    --primary-pink: #f2aeb1;
-    --primary-blue: #1987ff;
-    --primary-grey: #cccccc;
-
-    --secondary-fade: rgba(0, 0, 0, 0.02);
-
-}
-
-/* Navbar */
-/* Navbar */
-
-.navLogo {
-    height: 3rem;
-    width: 3rem;
-    margin-right: 3px;
-}
-
-.navLogo img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; 
-}
-
-/* Welcome.html */
-/* Welcome.html */
-
-.banner {
+.postBanner {
     border: 2px solid black;
-    height: 35rem;
+    height: 25rem;
     overflow: hidden;
 }
 
-.brainContainer {
-    height: 20rem;
-    display: flex;
-    justify-content: center;
-}
 
-.brainContainer img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; 
+/* Reviews Slider 2 */
+/* Reviews Slider 2 */
 
-}
-
-/* Helpers */
-/* Helpers */
-.blueBG {
-    background-color: #1987ff;
-}
-.redBG {
-    background-color: red;
-}
-.greenBG {
-    background-color: green;
-}
-.blackBG {
-    background-color: black;
-}
-.greyBG {
-    background-color: grey;
-}
-
-/* Footer */
-/* Footer */
-
-footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--secondary-fade);
-}
-
-/* Reviews Banenr */
-/* Reviews Banenr */
-
-.reviewsBanenr {
-    display: flex;
-    align-items: center;
-    margin-top: 5rem;
-    overflow: hidden;
-}
-
-.reviewsTitle {
-    color: black;
-}
-
-/* Post.home */
-/* Post.home */
-
-.mostRecentTitle {
-    align-self: flex-start;
-}
-
-/* Reviews Slider  */
-/* Reviews Slider  */
-
-
-#album-rotator {
+#album-rotator2 {
     width: 1000px;
     float: left;
     white-space: nowrap;
@@ -111,7 +18,7 @@ footer {
     padding: 2rem 0;
 }
 
-#album-rotator-holder {
+#album-rotator2-holder {
     position: relative;
     user-select: none;
     will-change: transform;
@@ -119,7 +26,7 @@ footer {
     /* transition: all 0.01s linear; */
 }
 
-#album-rotator:after {
+#album-rotator2:after {
     content: '';
     position: absolute;
     top: 0;
@@ -128,7 +35,7 @@ footer {
     height: 100%;
     pointer-events: none;
 }
-.album-item {
+.album-item2 {
     word-break: keep-all;
     background: var(--primary-grey);
     box-shadow: 0 5px 5px rgba(0,0,0,0.5);
@@ -147,9 +54,10 @@ footer {
     transform: scale(1);
 }
 
-.album-item:hover {
+.album-item2:hover {
     transform: scale(1.02);
 }
+
 .album-details {
     background: transparent;
     position: absolute;

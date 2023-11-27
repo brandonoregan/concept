@@ -129,6 +129,8 @@ STATIC_URL = "static/"
 # Define the directory where your static files are collected
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "apps/posts/static"),
+    os.path.join(BASE_DIR, "apps/users/static"),
 ]
 
 # Default primary key field type
