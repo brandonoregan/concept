@@ -18,7 +18,10 @@
             <h1>See if you can understand some of these concepts</h1>
         </div>
     </div>
-
+    <form action="{% url 'post_create' %}" method="get" class="">
+        {% csrf_token %}
+        <button class="btn btn-outline-primary">Create post</button>
+    </form>
     <!-- SLider utilizing root-dir script -->
     <div class="postBanner reviewsBanner d-flex justify-content-center align-items-center flex-column">
         {% include "posts/includes/post_slider.html" %}
