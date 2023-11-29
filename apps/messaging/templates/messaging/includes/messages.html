@@ -18,7 +18,7 @@
             {% for message in user_messages %}
                 <form action="{% url 'unopened' message.id %}" method="post">
                     {% csrf_token %}
-                    <div id="messageCell" class="row p-2 {% if message.read == False %}unreadMessage {% endif %} messageCell">
+                    <div id="messageCell" class="row p-2 {% if message.unopened == False %}unreadMessage {% endif %} messageCell">
                         <div class="col-auto">
                             {% if message.sender.profile.profile_picture %}
                                 <img src="{{ message.sender.profile.profile_picture.url }}" alt="Sender Profile Picture">

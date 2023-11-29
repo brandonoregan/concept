@@ -1,18 +1,30 @@
 {% load static %}
 
 <!-- Banner Row -->
-<div class="row">
+<div class="row messageDisplayBannerRow">
     <!-- Profile Picture Col -->
-    <div class="col"></div>
+    <div class="col">
+        {% if display_message.sender.profile.profile_picture %}
+            <img src="{{ display_message.sender.profile.profile_picture.url }}" alt="Sender Profile Picture">
+            {% else %}
+            <img src="{% static 'images/no-image.jpg' %}" alt="No image">
+        {% endif %}
+    </div>
     <!-- User Information -->
-    <div class="col"></div>
+    <div class="col">
+        <h3>{{ display_message.sender }}</h3>
+    </div>
 </div>
 <!-- Display Message Content and History -->
 <div class="row">
     <div class="col">
-        {% if message %}
-        <p>{{ message.content }}</p>
-        {% endif %}
+        {% for message in message_thread %}
+        <div class="border d-flex">
+            <p class="bold">{{ message.sender }}</p>
+            <p>{{ message.content }}</p>
+            <p>{{ message.sent_at }}</p>
+        </div>
+        {% endfor %}
         <!-- TODO For each message in messages where sender and reciver are equal, in order of date create a tab representing a message -->
     </div>
 </div>
