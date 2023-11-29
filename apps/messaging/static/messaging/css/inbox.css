@@ -51,3 +51,42 @@
     border: 2px solid black;
     border-radius: 50%;
 }
+
+.messageBlue {
+    padding: 1rem;
+    
+}
+.messageBlue p {
+    margin: 0;
+}
+
+.convoContent {
+    background-color: lightgreen;
+    padding: .5rem;
+    width: ;
+    display: inline-block;
+    max-width: 90%;
+    border-radius: 1rem 1rem 1rem 0;
+}
+
+.messageGreen {
+    margin-left: auto;
+}
+
+.messageGreen p {
+    margin: 0;
+}
+
+.convoContentGreen {
+    background-color: rgb(249, 242, 242);
+    padding: .5rem;
+    width: ;
+    display: inline-block;
+    max-width: 90%;
+    border-radius: 1rem 1rem 0 1rem;
+}
+
+.convoContainer {
+    overflow-y: scroll;
+    max-height: 35rem;
+}

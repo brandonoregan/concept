@@ -16,14 +16,30 @@
     </div>
 </div>
 <!-- Display Message Content and History -->
-<div class="row">
+<div class="row convoContainer">
     <div class="col">
         {% for message in message_thread %}
-        <div class="border d-flex">
-            <p class="bold">{{ message.sender }}</p>
-            <p>{{ message.content }}</p>
-            <p>{{ message.sent_at }}</p>
-        </div>
+            {% if message.sender == current_user %}
+                <div class="border messageGreen text-end w-100 ms-auto">
+                    <p class="convoSenderGreen">{{ message.sender }}</p>
+                    <p class="convoContentGreen">{{ message.content }}</p>
+                    {% if message.sent_at|time:"H" < "12" %}
+                        <p class='convoTimeGreen'>{{ message.sent_at|time:"h:i A" }}</p>
+                    {% else %}
+                        <p>{{ message.sent_at|time:"h:i A" }}</p>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="border messageBlue">
+                    <p class="convoSender">{{ message.sender }}</p>
+                    <p class="convoContent">{{ message.content }}</p>
+                    {% if message.sent_at|time:"H" < "12" %}
+                        <p class='convoTime'>{{ message.sent_at|time:"h:i A" }}</p>
+                    {% else %}
+                        <p>{{ message.sent_at|time:"h:i A" }}</p>
+                    {% endif %}
+                </div>
+            {% endif %}
         {% endfor %}
         <!-- TODO For each message in messages where sender and reciver are equal, in order of date create a tab representing a message -->
     </div>

@@ -36,6 +36,7 @@ def inbox(request):
         "user_messages": user_messages,
         "display_message": display_message,
         "message_thread": message_thread,
+        "current_user": current_user,
         })
         
 
