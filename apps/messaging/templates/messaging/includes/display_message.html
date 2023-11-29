@@ -1,0 +1,24 @@
+{% load static %}
+
+<!-- Banner Row -->
+<div class="row">
+    <!-- Profile Picture Col -->
+    <div class="col"></div>
+    <!-- User Information -->
+    <div class="col"></div>
+</div>
+<!-- Display Message Content and History -->
+<div class="row">
+    <div class="col">
+        {% if message %}
+        <p>{{ message.content }}</p>
+        {% endif %}
+        <!-- TODO For each message in messages where sender and reciver are equal, in order of date create a tab representing a message -->
+    </div>
+</div>
+<!-- Reply Form -->
+<div class="row">
+    <div class="col">
+        <!-- TODO Create a simple messaging form for a easy reply -->
+    </div>
+</div>

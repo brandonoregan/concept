@@ -1,0 +1,46 @@
+{% load static %}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col">
+            <h3>Inbox</h3>
+        </div>
+        <div class="col">
+            <form action="{% url 'create_message' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"  class="btn btn-primary">New Message</button>
+            </form>
+        </div>
+    </div>
+    <!-- Messages Scroll Container -->
+    <div class="row mt-3 mb-3 messageScrollContainer">
+        <div class="col border">
+            {% for message in user_messages %}
+                <form action="{% url 'unopened' message.id %}" method="post">
+                    {% csrf_token %}
+                    <div id="messageCell" class="row p-2 {% if message.read == False %}unreadMessage {% endif %} messageCell">
+                        <div class="col-auto">
+                            {% if message.sender.profile.profile_picture %}
+                                <img src="{{ message.sender.profile.profile_picture.url }}" alt="Sender Profile Picture">
+                                {% else %}
+                                <img src="{% static 'images/no-image.jpg' %}" alt="No image">
+                            {% endif %}
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col">
+                                    <p>{{ message.sender.username }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p>{{ message.subject }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            {% endfor %}
+        </div>
+    </div>
+</div>

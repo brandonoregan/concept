@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "apps.messaging",
     "apps.posts",
     "apps.users",
     "bootstrap5",
@@ -131,6 +132,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "apps/posts/static"),
     os.path.join(BASE_DIR, "apps/users/static"),
+    os.path.join(BASE_DIR, "apps/messaging/static"),
 ]
 
 # Default primary key field type

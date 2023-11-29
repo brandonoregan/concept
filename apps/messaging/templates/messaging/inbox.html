@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+    Inbox
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'messaging/css/inbox.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Messages -->
+            <div class="col col-md-4 messagesContainer">
+                {% include 'messaging/includes/messages.html' %}
+            </div>
+            <!-- Message Display -->
+            <div class="col col-md-7 displayMessageContainer">
+                {% include 'messaging/includes/display_message.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
