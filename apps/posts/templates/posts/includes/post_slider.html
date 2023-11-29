@@ -1,41 +1,25 @@
 <h1 class="mostRecentTitle">Most Recent Post</h1>
 <div id="album-rotator" class="album-rotator">
 <div id="album-rotator-holder" class="album-rotator-holder">
+    <form action="{% url 'post_create' %}" method="get" class="album-item album-item-style">
+        {% csrf_token %}
+        <button type="submit" class="btn">
+            <span class="album-details">
+                <span class="title">Create a post</span>
+                <span class="subtitle">It doesn't have to be perfect!</span>
+                <span class="subtext">Do it annonymusly</span>
+            </span>
+        </button>
+    </form>
+    {% for post in all_posts %}
     <a target="_top" class="album-item album-item-style" href="https://twitter.com/smpnjn">
         <span class="album-details">
-            <span class="icon"><i class="far fa-at"></i> smpnjn</span>
-            <span class="title">Click to</span>
-            <span class="subtitle">Follow</span>
-            <span class="subtext">On Twitter</span>
+            <span class="title">{{ post.title }}</span>
+            <span class="subtitle">{{ post.about }}</span>
+            <span class="subtext">{{ post.author.username }}</span>
         </span>
     </a>
-    <a target="_top" class="album-item album-item-style" href="https://fjolt.com/article/apple-cards-webl-gl-javascript">
-        <span class="album-details">
-            <span class="title">Read the</span>
-            <span class="subtitle">Tutorial</span>
-            <span class="subtext">View tutorial for this effect</span>
-        </span>
-    </a>
-    <a target="_top" class="album-item album-item-style" href="https://twitter.com/smpnjn">
-        <span class="album-details">
-            <span class="title">Finally</span>
-            <span class="subtitle">We Go</span>
-            <span class="subtext">Some text to describe this item</span>
-        </span>
-    </a>
-    <a target="_top" class="album-item album-item-style" href="https://twitter.com/smpnjn">
-        <span class="album-details">
-            <span class="title">And</span>
-            <span class="subtitle">One More</span>
-            <span class="subtext">Some text to describe this item</span>
-        </span>
-    </a>
-    <a class="album-item album-item-style" href="https://twitter.com/smpnjn">
-        <span class="album-details">
-            <span class="title">And</span>
-            <span class="subtitle">Finally..</span>
-            <span class="subtext">Some text to describe this item</span>
-        </span>
-    </a>
+    {% endfor %}
 </div>
 </div>
+
