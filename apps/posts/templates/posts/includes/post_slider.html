@@ -12,13 +12,16 @@
         </button>
     </form>
     {% for post in all_posts %}
-    <a target="_top" class="album-item album-item-style" href="https://twitter.com/smpnjn">
-        <span class="album-details">
-            <span class="title">{{ post.title }}</span>
-            <span class="subtitle">{{ post.about }}</span>
-            <span class="subtext">{{ post.author.username }}</span>
-        </span>
-    </a>
+        <form action="{% url 'post_thread' post.id %}" method="get" class="album-item album-item-style">
+            {% csrf_token %}
+            <button type="submit" class="btn">
+                <span class="album-details">
+                    <span class="title">{{ post.title }}</span>
+                    <span class="subtitle">{{ post.about }}</span>
+                    <span class="subtext">{{ post.author.username }}</span>
+                </span>
+            </button>
+        </form>
     {% endfor %}
 </div>
 </div>

@@ -6,12 +6,14 @@ from django.utils.text import slugify
 
 # Create your models here.
 
+
 class Tag(models.Model):
     caption = models.CharField(max_length=20)
 
     def __str__(self):
         return self.caption
-    
+
+
 class Post(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=150)
@@ -22,8 +24,6 @@ class Post(models.Model):
     post_image = models.ImageField(upload_to="post_images/", blank=True, null=True)
     likes = models.IntegerField(default=0)
     tags = models.ManyToManyField(Tag)
-
-
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -42,6 +42,3 @@ class Comment(models.Model):
 class Like(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
-
-
-

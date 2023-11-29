@@ -12,7 +12,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 def home(request):
     all_posts = Post.objects.all()
 
-    return render(request, "posts/home.html",  context={"all_posts": all_posts})
+    return render(request, "posts/home.html", context={"all_posts": all_posts})
 
 
 # Class to create a post
@@ -22,34 +22,33 @@ class PostCreate(LoginRequiredMixin, CreateView):
     template_name = "posts/post_create.html"
     success_url = reverse_lazy("home_page")
 
-
     # Set the author to the logged-in user
     def form_valid(self, form):
-        form.instance.author = self.request.user  
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-# def post_page(request, post_id):
-#     post = Post.objects.get(pk=post_id)
-#     comments = Comment.objects.filter(post=post)
+def post_single(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    comments = Comment.objects.filter(post=post)
 
-#     if request.method == "POST":
-#         comment_form = CommentForm(request.POST)
-#         if comment_form.is_valid():
-#             new_comment = comment_form.save(commit=False)
-#             new_comment.post = post
-#             new_comment.author = request.user
-#             new_comment.save()
-#             return redirect("post_page", post_id=post_id)
-#     else:
-#         comment_form = CommentForm()
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)  # TODO add comment form
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.author = request.user
+            new_comment.save()
+            return redirect("post_page", post_id=post_id)
+    else:
+        comment_form = CommentForm()  # TODO add comment form
 
-#     return render(
-#         request,
-#         "posts/post.html",
-#         {
-#             "post": post,
-#             "comments": comments,
-#             "comment_form": comment_form,
-#         },
-#     )
+    return render(
+        request,
+        "posts/post_thread.html",
+        {
+            "post": post,
+            "comments": comments,
+            "comment_form": comment_form,
+        },
+    )
