@@ -14,6 +14,12 @@
 /* Navbar */
 /* Navbar */
 
+header {
+    margin: 0;
+    padding: 0;
+
+}
+
 .navLogo {
     height: 3rem;
     width: 3rem;

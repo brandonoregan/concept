@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import CreateUser
 from django.views.generic.edit import CreateView
@@ -8,6 +7,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth import login
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
+from apps.profiles.models import Profile
 
 # from apps.profiles.models import Profile #TODO
 
@@ -50,7 +50,7 @@ class RegisterUser(SuccessMessageMixin, CreateView):
         user = form.save()
 
         # Create a Profile instance linked to the user
-        # Profile.objects.create(user=user) #TODO undo this and add profile when app is created
+        Profile.objects.create(user=user)
 
         # Log in the user
         login(self.request, user)

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+    <div class="container d-flex justify-content-center ">
+            <h3>Update Profile Form</h3>
+            {% crispy form %}
+    </div>
+{% endblock %}
