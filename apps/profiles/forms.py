@@ -1,56 +1,66 @@
 from django import forms
 from .models import Profile
+from django.urls import reverse_lazy
+from apps.users.models import CustomUser
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from crispy_forms.layout import Submit, Layout
 
-class ProfileUpdateForm(forms.ModelForm):
-    bio = forms.Textarea()
-    profile_picture = forms.ImageField(required=False)
-
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['bio', 'profile_picture']
+        fields = ["bio"]
+
+        widgets = {
+            "bio": forms.Textarea(
+                attrs={
+                    "placeholder": "Tell us a little about yourself...",
+                }
+            ),
+        }
 
     def __init__(self, *args, **kwargs):
-        super(ProfileUpdateForm, self).__init__(*args, **kwargs)
-        self.fields["bio"].widget.attrs["class"] = "bioInput"
-        self.fields["bio"].label = "Bio:"
-        self.fields["birthdate"].label = "Another Label Text"
-
-        # Adding Crispy Forms functionality
+        super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_class = "updateProfile"
+        self.helper.form_method = 'post'
+        self.helper.form_class = 'bioInput'  # CSS class for the form
+        self.helper.label_class = ''  # CSS class for the labels
+        self.helper.field_class = ''  # CSS class for the input fields
+
+        self.helper.layout = Layout(
+            'bio',  # Define fields here in the desired order
+            Submit('info_form', 'Update Bio')  # Adding a submit button
+        )
+
+
+class ProfilePicForm(forms.ModelForm):
+    profile_picture = forms.ImageField(widget=forms.FileInput)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = "profile_pic_button"
         self.helper.form_method = "post"
-        self.helper.form_action = "profile"
-        self.helper.add_input(Submit("submit", "Update", css_class="updateProfile"))
+        self.helper.form_action = reverse_lazy("profile")
+        self.helper.add_input(Submit("pic_form", "Upload"))
+        
+    class Meta:
+        model = Profile
+        fields = ["profile_picture"]
+    
+    
 
-        # Populate the initial values of the form fields
-        if self.instance.user:
-            self.fields['bio'].initial = self.instance.bio
-            self.fields['profile_picture'].initial = self.instance.profile_picture
-
-    def save(self, commit=True):
-        profile = super(ProfileUpdateForm, self).save(commit=False)
-        profile.bio = self.cleaned_data['bio']
-        profile.profile_picture = self.cleaned_data['profile_picture']
-
-        # Update associated User model fields
-        if profile.user:
-            user = profile.user
-            user.first_name = self.cleaned_data['first_name']  # Update User fields as needed
-            user.last_name = self.cleaned_data['last_name']
-
-            if commit:
-                profile.save()
-                user.save()
-
-        return profile
+class EditUserForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'first_name', 'last_name']
 
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_id = 'edit_user'
+        self.helper.form_class = 'edit_user'
+        self.helper.form_method = 'post'
+        self.helper.form_action = 'edit_user'
 
-# class ProfilePicForm(forms.ModelForm):
-#     profile_picture = forms.ImageField(widget=forms.FileInput)
-
-#     class Meta:
-#         model = Profile
-#         fields = ["profile_picture"]
+        self.helper.add_input(Submit('submit', 'Submit'))

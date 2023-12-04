@@ -9,8 +9,6 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from apps.profiles.models import Profile
 
-# from apps.profiles.models import Profile #TODO
-
 # Create your views here.
 
 
@@ -48,6 +46,9 @@ class RegisterUser(SuccessMessageMixin, CreateView):
     def form_valid(self, form):
         # Save the user instance and get the user object
         user = form.save()
+        print('||||||||||||||||||||||||||||')
+        print(user)
+        print('||||||||||||||||||||||||||||')
 
         # Create a Profile instance linked to the user
         Profile.objects.create(user=user)
