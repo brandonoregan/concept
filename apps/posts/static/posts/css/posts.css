@@ -1,6 +1,16 @@
-.homeContainer {
-    width: 1100px;
+:root {
+
+    /* Custom colours */
+    --primary-pink: #f2aeb1;
+    --primary-blue: #1987ff;
+    --primary-grey: #cccccc;
+
+    --secondary-fade: rgba(0, 0, 0, 0.02);
+
 }
+
+/* home.html */
+/* home.html */
 
 .postBanner {
     height: 25rem;
@@ -13,10 +23,8 @@
     align-self: flex-end;
 }
 
-
-/* Reviews Slider  */
-/* Reviews Slider  */
-
+/* Post Tiles */
+/* Post Tiles */
 
 .album-rotator {
     width: 1000px;
@@ -48,7 +56,7 @@
 }
 .album-item-style {
     word-break: keep-all;
-    background: lightgray;
+    background-color: var(--primary-blue);
     box-shadow: 0 5px 5px rgba(0,0,0,0.5);
     position: relative;
     width: 250px;

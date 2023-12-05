@@ -21,12 +21,10 @@ def welcome(request):
 
 class LoginUser(SuccessMessageMixin, LoginView):
     template_name = "users/login_user.html"
-    success_url = reverse_lazy("register_user")
+    success_url = reverse_lazy("home_page")
     success_message = "You were successfully logged in."
 
     
-
-
 class LogoutUser(SuccessMessageMixin, LogoutView):
     next_page = reverse_lazy("welcome")
 
