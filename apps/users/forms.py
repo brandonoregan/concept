@@ -23,3 +23,4 @@ class CreateUser(UserCreationForm):
             "password1", 
             "password2", 
         ]
+

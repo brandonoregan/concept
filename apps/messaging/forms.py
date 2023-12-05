@@ -7,4 +7,4 @@ from crispy_forms.layout import Submit
 class MessageForm(forms.ModelForm):
     class Meta:
         model = Message
-        fields = ["receiver", "subject", "content"]
+        fields = ["receiver", "text"]

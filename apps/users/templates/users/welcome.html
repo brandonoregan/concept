@@ -8,79 +8,39 @@
 
 {% block head %}
     <!-- CSS link -->
-    <link rel="stylesheet" type="text/css" href="{% static 'users/welcome.css' %}">
-
-    <!-- Reviews Link -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/welcome.css' %}">
 {% endblock %}
 
 
 {% block content %}
-    <div class="container">
+    <div class="container-fluid">
         <!-- Landing Page -->
         <div class="row banner">
-            <div class="col  pt-3">
-                <div class="row  align-items-start">
-                    <div class="col ">
-                        <div class="brainContainer">
-                            <img src="{% static 'images/welcome_brain.png' %}" alt="Brain outline">
+            <div class="col">
+                <div class="row align-items-start">
+                    <div class="col position-relative mt-5 ">
+                        <div class="heroLogoContainer ">
+                            <img src="{% static 'images/welcome_brain.png' %}" alt="Brain outline" class="grey-wash">
                         </div>
+                        <h1 class="overlay-text">CONCEPT</h1>
+                        <p class="overlay-text-p">Improve you're learning ability</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <h1>CONCEPT</h1>
-                        <h2>Improve you're learning ability</h1>
-                    </div>
-                </div>
-                <div class="row text-center">
+                <!-- <div class="row text-center">
                     <div class="col signupButtonCol">
-                        <div class="button btn btn-primary ms-auto">
+                        <div class="button btn btn-primary ms-auto signupBtn">
                             Signup
                         </div>
                     </div>
-                </div>                
+                </div>                 -->
             </div>
         </div>
         <!-- Marketing Slider -->
-        <div class="row banner">
-            <div class="col">
-                <div id="carouselExampleIndicators" class="carousel slide">
-                    <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                      <div class="carousel-item active">
-                        <div class="d-block banner w-100 blueBG">
-                        </div>
-                      </div>
-                      <div class="carousel-item ">
-                        <div class="d-block banner w-100 redBG">
-                            <h1>RED RED RED</h1>
-                        </div>
-                      </div>
-                      <div class="carousel-item ">
-                        <div class="d-block banner w-100 greenBG">
-                            <h1>GREEN GREEN GREEN</h1>
-                        </div>
-                      </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span class="visually-hidden">Next</span>
-                    </button>
-                  </div>
-            </div>
+        <div class="row banner sliderBanner">
+            {% include "users/includes/slider.html" %}
         </div>
         <!-- Reviews Slider -->
-        <div class="banner reviewsBanner d-flex justify-content-center align-items-center flex-column">
+        <div class=" row banner reviewsBanner ">
             {% include "users/includes/reviews_slider.html" %}
         </div>
     </div>

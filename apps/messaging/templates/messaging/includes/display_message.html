@@ -28,7 +28,7 @@
                     {% if message.sender == current_user %}
                         <div class="border messageGreen text-end w-100 ms-auto">
                             <p class="convoSenderGreen">{{ message.sender }}</p>
-                            <p class="convoContentGreen">{{ message.content }}</p>
+                            <p class="convoContentGreen">{{ message.text }}</p>
                             {% if message.sent_at|time:"H" < "12" %}
                                 <p class='convoTimeGreen'>{{ message.sent_at|time:"h:i A" }}</p>
                             {% else %}
@@ -38,7 +38,7 @@
                     {% else %}
                         <div class="border messageBlue">
                             <p class="convoSender">{{ message.sender }}</p>
-                            <p class="convoContent">{{ message.content }}</p>
+                            <p class="convoContent">{{ message.text }}</p>
                             {% if message.sent_at|time:"H" < "12" %}
                                 <p class='convoTime'>{{ message.sent_at|time:"h:i A" }}</p>
                             {% else %}
