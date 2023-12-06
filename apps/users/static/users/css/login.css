@@ -46,3 +46,15 @@
     font-size: 1.2rem;
     font-weight: 700;
 }
+
+.submitButton {
+    display: block;
+    /* margin-left: auto; */
+    background-color: black;
+    width: 100%;
+    font-weight: 600;
+}
+
+.submitButton:hover {
+    border: white;
+}

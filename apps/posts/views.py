@@ -9,10 +9,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 # Create your views here.
 
 
-def home(request):
-    all_posts = Post.objects.all()
+def post_home(request):
+    recent_posts = Post.objects.order_by('date')[:5]
 
-    return render(request, "posts/home.html", context={"all_posts": all_posts})
+    return render(request, "posts/post_home.html", context={"recent_posts": recent_posts})
 
 
 # Class to create a post
@@ -20,7 +20,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = "posts/post_create.html"
-    success_url = reverse_lazy("home_page")
+    success_url = reverse_lazy("post_home")
 
     # Set the author to the logged-in user
     def form_valid(self, form):

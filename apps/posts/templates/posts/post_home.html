@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'posts/css/post_home.css' %}">
+    <!-- JavaScript link -->
+    <script type="module" src="{% static 'posts/js/posts.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row text-center ">
+            <div class="col">
+                <h1 class="homeTitle">
+                    Recent Concepts
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="carouselContainer">
+                    <div class="card-carousel">
+                        {% for post in recent_posts %}
+                                {% include 'posts/includes/recent_post_card.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center mt-md-5 mt-2  ">
+            <div class="col">
+                <form action="{% url 'post_create' %}"><button class="btn btn-primary createButton">Create your own concept</button></form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

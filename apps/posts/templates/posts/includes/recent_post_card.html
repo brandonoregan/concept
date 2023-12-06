@@ -1,0 +1,17 @@
+{% load static %}
+
+<form class="d-inline m-0 p-0 border-0 " action="{% url 'post_thread' post_id=post.id %}" method="GET">
+    <button type="submit" class="card-btn">
+        <div class="card">
+            <div class="image-container">
+                {% if post.post_image %}
+                    <img src="{{ post.post_image.url }}" alt="Post Image">
+                {% else %}
+                    <img src="{% static 'images/no-image.jpg' %}" alt="No image available">
+                {% endif %}
+            </div>
+            <h2>{{ post.title }}</h2>
+            <p class="aboutText">{{ post.about }}</p>
+        </div>
+    </button>
+</form>
