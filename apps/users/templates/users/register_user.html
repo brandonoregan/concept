@@ -22,13 +22,13 @@
                     </div>
                 </div>
                 <div class="col col-md-6 rightCol">
-                    <form action="{% url 'login_user' %}" method="post" class="registerForm p-3">
+                    <form action="{% url 'register_user' %}" method="post" class="registerForm p-3">
                         {% csrf_token %}
                         <h3 class="loginTitle mb-2 ">Join the fun!</h3>
                         <div class=" mt-3 ">
                             {{ form|crispy }}
                         </div>
-                        <button type="submit" class="btn btn-primary submitButton">Login</button>
+                        <button type="submit" class="btn btn-primary submitButton">Signup</button>
                     </form>
                 </div>
             </div>

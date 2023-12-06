@@ -1,0 +1,70 @@
+body {
+  background-color: var(--primary-blue);
+}
+
+.navbar {
+  background-color: white;
+}
+
+.main_post {
+    padding: 2rem;
+
+    max-width: 90rem;
+
+}
+
+#summary h2 {
+  color: white;
+  font-size: 4.5rem;
+  margin-bottom: 0.25rem;
+}
+  
+.postImageContainer {
+  /* position: absolute; */
+  top: 2rem;
+  right: 3rem;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-align: right;
+  color: white;
+}
+  
+.postImageContainer img {
+  width: 12rem;
+  height: 12rem;
+  border-radius: 12px;
+  /* transform: rotateZ(5deg); */
+  border: 5px solid white;
+  margin-bottom: 1rem;
+}
+
+#summary a {
+  color: white;
+  text-decoration: underline;
+}
+
+#summary address {
+  font-weight: bold;
+}
+
+#summary time {
+  font-weight: bold;
+} 
+
+
+.tag {
+  
+  background-color: white;
+  color: #390281;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+/* Comment Thread */
+/* Comment Thread */
+
+.commentThread {
+  max-height: 100vh;
+  background-color: green;
+  border-radius: 16px;
+}

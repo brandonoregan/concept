@@ -45,7 +45,7 @@ def post_single(request, post_id):
 
     return render(
         request,
-        "posts/post_thread.html",
+        "posts/post_single.html",
         {
             "post": post,
             "comments": comments,

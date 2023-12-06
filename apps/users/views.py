@@ -21,7 +21,7 @@ def welcome(request):
 
 class LoginUser(SuccessMessageMixin, LoginView):
     template_name = "users/login_user.html"
-    success_url = reverse_lazy("home_page")
+    success_url = reverse_lazy('post_home')
     success_message = "You were successfully logged in."
 
     
@@ -41,7 +41,7 @@ class RegisterUser(SuccessMessageMixin, CreateView):
     success_message = (
         "Your profile was created successfully"  # Following successful registration
     )
-    success_url = reverse_lazy("profile")  # Redirected page or view trigger
+    success_url = reverse_lazy("login_user")  # Redirected page or view trigger
     # authentication_form = CustomLoginForm
 
     # Login registered user on correct form validation
@@ -55,11 +55,11 @@ class RegisterUser(SuccessMessageMixin, CreateView):
         # Log in the user
         login(self.request, user)
 
-        # Fetch the admin Custom User Object
-        admin = CustomUser.objects.get(username='admin')
+        # # Fetch the admin Custom User Object
+        # admin = CustomUser.objects.get(username='admin')
 
-        # Create a Message object
-        Message.objects.create(sender=admin, receiver=user, text='Welcome to your inbox, use the search bar to find people to connect with!')
+        # # Create a Message object
+        # Message.objects.create(sender=admin, receiver=user, text='Welcome to your inbox, use the search bar to find people to connect with!')
 
 
         return super().form_valid(form)
