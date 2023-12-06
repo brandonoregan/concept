@@ -1,6 +1,12 @@
-.mainContainer {
+body {
     background-color: var(--primary-blue);
-    min-height: calc(100vh - 4rem);
+}
+
+.navbar{
+    background-color: white;
+}
+
+.mainContainer {
     padding: 2rem 0 0 0;
 }
 
@@ -39,11 +45,13 @@ input:hover {
     color: white;
 }
 
-#submit-id-submit {
-    float: right;
+
+.submitButton {
+    display: block;
+    margin-left: auto;
     background-color: black;
 }
 
-#submit-id-submit:hover {
+.submitButton:hover {
     border: white;
 }

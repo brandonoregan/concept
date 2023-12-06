@@ -26,7 +26,7 @@ class ProfileForm(forms.ModelForm):
         self.helper.form_action = "edit_profile"
         self.helper.layout = Layout(
             'bio',  # Define fields here in the desired order
-            Submit('info_form', 'Update Bio')  # Adding a submit button
+            Submit('info_form', 'Update Bio', css_class='submitButton')  # Adding a submit button
         )
 
 
@@ -39,7 +39,7 @@ class ProfilePicForm(forms.ModelForm):
         self.helper.form_class = "profile_pic_button"
         self.helper.form_method = "post"
         self.helper.form_action = reverse_lazy("edit_profile")
-        self.helper.add_input(Submit("pic_form", "Upload"))
+        self.helper.add_input(Submit("pic_form", "Upload",  css_class='submitButton'))
         
     class Meta:
         model = Profile
@@ -61,4 +61,4 @@ class EditUserForm(forms.ModelForm):
         self.helper.form_method = 'post'
         self.helper.form_action = 'edit_user'
 
-        self.helper.add_input(Submit('submit', 'Submit'))
+        self.helper.add_input(Submit('submit', 'Submit', css_class='submitButton'))
