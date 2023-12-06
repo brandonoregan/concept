@@ -5,6 +5,7 @@ from apps.users.models import CustomUser
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout
 
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
@@ -22,10 +23,7 @@ class ProfileForm(forms.ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
-        self.helper.form_class = 'bioInput'  # CSS class for the form
-        self.helper.label_class = ''  # CSS class for the labels
-        self.helper.field_class = ''  # CSS class for the input fields
-
+        self.helper.form_action = "edit_profile"
         self.helper.layout = Layout(
             'bio',  # Define fields here in the desired order
             Submit('info_form', 'Update Bio')  # Adding a submit button
@@ -40,7 +38,7 @@ class ProfilePicForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_class = "profile_pic_button"
         self.helper.form_method = "post"
-        self.helper.form_action = reverse_lazy("profile")
+        self.helper.form_action = reverse_lazy("edit_profile")
         self.helper.add_input(Submit("pic_form", "Upload"))
         
     class Meta:
@@ -59,7 +57,7 @@ class EditUserForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_id = 'edit_user'
-        self.helper.form_class = 'edit_user'
+        self.helper.form_class = 'form'
         self.helper.form_method = 'post'
         self.helper.form_action = 'edit_user'
 

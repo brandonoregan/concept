@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'profiles/css/profiles.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row topSection">
+        <div class="col d-flex justify-content-center mt-3 mb-2">
+            <div class="profilePicContainer position-relative">
+                {% if profile_picture is not None %}
+                    <img class="profilePic" src="{{ profile_picture.url }}" alt="Profile Picture">
+                <!-- If user does not have a display picture -->
+                {% else %}
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="135"
+                        height="135"
+                        fill="currentColor"
+                        class="bi bi-person-circle"
+                        viewBox="0 0 16 16"
+                    >
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path
+                        fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                        />
+                    </svg>
+                {% endif %}
+                <!-- Profile and Bio Button -->
+                <form class="editProfileForm" method="get" action="{% url 'edit_profile' %}">
+                    <button class="btn" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cloud-plus-fill" viewBox="0 0 16 16">
+                        <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2m.5 4v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0"/></svg>
+                    </button>
+                </form>
+                <!-- Settings Wheel Button -->
+                {% include 'profiles/includes/profile_settings_form.html' %}
+            </div>
+        </div>
+        <h2 class="text-center ">{{ current_user.profile.bio }}</h2>
+    </div>
+    <div class="row userPostSection">
+        <div class="col" id="userPosts">
+                <!-- TODO -- Write function that changes the title of all your posts deoending on who is visting the page. -->
+                <h2 class="reviewsTitle">All your posts</h2>
+                <ul class="mt-md-5">
+                    <li>
+                        <form action="{% url 'post_create' %}" method="get" class="">
+                            <button type="submit" class="btn">
+                                <div class="post">
+                                        <h3>Hey {{ current_user }}!</h3>
+                                        <p>It looks like you haven't create a post yet! <br><br> Click on this tile to create a post!<p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-upload mt-2 " viewBox="0 0 16 16">
+                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                                          </svg>
+                                </div>
+                            </button>
+                        </form>
+                    </li>
+                    {% if user_posts %}
+                        {% for post in user_posts %}
+                        {% include 'profiles/includes/post.html' %}
+                        {% endfor %}
+                    {% else %}
+                    <li>
+                        <form action="{% url 'post_create' %}" method="get" class="">
+                            <button type="submit" class="btn">
+                                <div class="post">
+                                        <h3>Hey {{ current_user }}!</h3>
+                                        <p>It looks like you haven't create a post yet! <br><br> Click on this tile to create a post!<p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-upload mt-2 " viewBox="0 0 16 16">
+                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/>
+                                          </svg>
+                                </div>
+                            </button>
+                        </form>
+                    </li>
+                    {% endif %}
+                    {% include 'profiles/includes/post.html' %}
+                    {% include 'profiles/includes/post.html' %}
+                    {% include 'profiles/includes/post.html' %}
+                    {% include 'profiles/includes/post.html' %}
+                    {% include 'profiles/includes/post.html' %}
+                </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
