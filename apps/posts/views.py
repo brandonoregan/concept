@@ -8,9 +8,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-
 def post_home(request):
-    recent_posts = Post.objects.order_by('date')[:5]
+    recent_posts = Post.objects.order_by('-date')[0:5]
+    for post in recent_posts:
+        print(post.id)
 
     return render(request, "posts/post_home.html", context={"recent_posts": recent_posts})
 
@@ -28,6 +29,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+# TODO: Create a slug url when on specific post page
 def post_single(request, post_id):
     post = Post.objects.get(pk=post_id)
     comments = Comment.objects.filter(post=post)

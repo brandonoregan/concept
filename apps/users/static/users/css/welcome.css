@@ -1,6 +1,10 @@
 /* Welcome.html */
 /* Welcome.html */
 
+body {
+    background-color: white;
+}
+
 /* Height of each section */
 .banner {
     /* border-bottom: 2px solid black; */

@@ -1,0 +1,45 @@
+{% load static %}
+
+<!-- Title Subject Row -->
+<div class="row">
+    <div class="col text-center ">
+        <h1>{{ post.title }}</h1>
+        <h2>{{ post.about }}</h2>
+    </div>
+</div>
+<!-- Image and Content Row-->
+<div class="row mt-2 pt-4 border-top">
+    <div class="col">
+        <div class="imageContainer">
+            <img src="{% if post.post_image %}{{ post.post_image.url }}{% else %}{% static 'images/welcome_brain.png' %}{% endif %}" alt="Post supporting image">
+        </div>
+        <p>
+            {{ post.content }}
+        </p>
+    </div>
+</div>
+<!-- Author, Date, Contact Row -->
+<div class="row authorRow">
+    <div class="col">
+        <div class="d-flex align-items-end ">
+        <!-- TODO: Add anonymous author options when creating a post -->
+        <!-- TODO: Save no profile pic svg to images then replace for author image below -->
+        {% if post.author == None %}
+        <p>Anonymous Author</p>
+        {% else %}
+            <div class="authorImageContainer">
+                <img src="{% if post.author.profile_picture %}{{ post.author.profile.profile_picture.url }}{% else %}{% static 'images/no-image.jpg' %}{% endif %}" alt="Author profile picture">
+            </div>
+                <p class="ms-3">Author: {{ post.author }}</p>
+                <a class="ms-auto me-auto" href="{% url 'inbox' %}">
+                    <p >Send a message <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
+                      </svg></p>
+                </a>
+            {% endif %}
+            <p class="ms-auto  ">
+                Posted: <time>{{ post.date|date:"d M Y" }}</time>
+            </p>
+        </div>
+    </div>
+</div>       

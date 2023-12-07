@@ -6,65 +6,66 @@ body {
   background-color: white;
 }
 
-.main_post {
-    padding: 2rem;
-
-    max-width: 90rem;
-
-}
-
-#summary h2 {
-  color: white;
-  font-size: 4.5rem;
-  margin-bottom: 0.25rem;
-}
-  
-.postImageContainer {
-  /* position: absolute; */
-  top: 2rem;
-  right: 3rem;
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  text-align: right;
-  color: white;
-}
-  
-.postImageContainer img {
-  width: 12rem;
-  height: 12rem;
-  border-radius: 12px;
-  /* transform: rotateZ(5deg); */
-  border: 5px solid white;
-  margin-bottom: 1rem;
-}
-
-#summary a {
-  color: white;
-  text-decoration: underline;
-}
-
-#summary address {
-  font-weight: bold;
-}
-
-#summary time {
-  font-weight: bold;
-} 
-
-
-.tag {
-  
+.postCol {
   background-color: white;
-  color: #390281;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
+  max-width: 900px;
+  margin: 2rem;
+  border-radius: 1rem;
+  border: 2px solid black;
+  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
 }
 
-/* Comment Thread */
-/* Comment Thread */
+.imageContainer{
+  max-height: 20rem;
+  max-width: 20rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 2px solid black;
+  margin: 0 1rem 1rem 1rem;
+  float: right;
+}
 
-.commentThread {
-  max-height: 100vh;
-  background-color: green;
-  border-radius: 16px;
+.imageContainer img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+h2 {
+  opacity: .8;
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.authorRow p {
+  font-weight: 700;
+}
+
+.authorImageContainer {
+  height: 5rem;
+  width: 5rem;
+}
+
+.authorImageContainer img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid black;
+}
+
+.authorRow {
+  height: 5rem;
+  margin: 1rem 0 0 0;
 }
