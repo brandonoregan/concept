@@ -1,0 +1,38 @@
+{% load static %}
+
+<div class="cardContainer ">
+    <div class="card position-relative ">
+        <div class="image-container position-relative">
+            {% if profile_picture is not None %}
+                <img src="{{ profile_picture.url }}" alt="Profile Picture">
+            <!-- If user does not have a display picture -->
+            {% else %}
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="135"
+                    height="135"
+                    fill="currentColor"
+                    class="bi bi-person-circle"
+                    viewBox="0 0 16 16"
+                >
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                    <path
+                    fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"
+                    />
+                </svg>
+            {% endif %}
+            <!-- Profile and Bio Button -->
+            <form class="editProfileForm" method="get" action="{% url 'edit_profile' %}">
+                <button class="btn" type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cloud-plus-fill" viewBox="0 0 16 16">
+                    <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2m.5 4v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0"/></svg>
+                </button>
+            </form>
+        </div>
+        <!-- Settings Wheel Button -->
+        {% include 'profiles/includes/profile_settings_form.html' %}
+        <h2>{{ current_user.username }}</h2>
+        <p class="aboutText">{{ current_user.profile.bio }}</p>
+    </div>
+</div>

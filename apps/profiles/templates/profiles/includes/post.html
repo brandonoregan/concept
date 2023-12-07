@@ -1,11 +1,19 @@
 {% load static %}
 
-<li>
-    <div class="post">
-            <img src="{% static 'images/brandon.jpg' %}" class="postImage">
-            <div class="post__content">
-                <h3>Johny Lingo</h3>
-                <p>I absolutely love this website. I've seen it every single day since I've signed up! </p>
+<div class="cardContainer">
+    <form class="" action="{% if post.id is not None %}{% url 'post_single' post_id=post.id %}{% else %}{% endif %}" method="GET">
+        <button type="submit" class="">
+            <div class="card">
+                <div class="image-container">
+                    {% if post.post_image %}
+                        <img src="{{ post.post_image.url }}" alt="Post Image">
+                    {% else %}
+                        <img src="{% static 'images/no-image.jpg' %}" alt="No image available">
+                    {% endif %}
+                </div>
+                <h2>{{ post.title }}</h2>
+                <p class="aboutText">{{ post.about }}</p>
             </div>
-    </div>
-</li>
+        </button>
+    </form>
+</div>
