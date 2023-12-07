@@ -13,6 +13,10 @@ body {
     border-radius: 1rem;
 }
 
+.profileCardContainer{
+    transform: scale(1.1);
+}
+
 /* Profile picture container inner image */
 .profilePicContainer img{
     width: 100%;
@@ -49,6 +53,7 @@ body {
     justify-content: center;
     font-weight: 700;
     flex-wrap: wrap;
+    margin-top: 2rem;
 }
 
 .rowContainer {
@@ -78,11 +83,15 @@ body {
     text-align: center;
     padding: 1.5rem 1rem 1rem 1rem;
     border-radius: 1em;
-    filter: brightness(.9);
+    filter: brightness(1);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
+}
+
+.card:hover {
+    transform: scale(1.1);
 }
 
 
@@ -118,6 +127,19 @@ filter: brightness(1)
 
 .image-container img {
     border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Profile card styling  */
+/* Profile card styling  */
+
+#profileCard:hover {
+    transform: scale(1);
+}
+
+#profileCard .image-container svg {
     height: 100%;
     width: 100%;
     object-fit: cover;

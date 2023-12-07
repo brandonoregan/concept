@@ -17,13 +17,14 @@
     <!-- Will be main page row -->
     <div class="row rowContainer">
         <div class="col" id="userPosts">
+            <!-- Create Post card -->
+            {% include 'profiles/includes/create_post_card.html' %}
+            <!-- Profile Card -->
+            {% include 'profiles/includes/profile_card.html' %}
             {% if user_posts %}
                     {% for post in user_posts %}
-                        {% if forloop.counter == 2 %}
-                            {% include 'profiles/includes/profile_card.html' %}
-                        {% else %}
-                            {% include 'profiles/includes/post.html' %}
-                        {% endif %}
+                        <!-- Post Card -->
+                        {% include 'profiles/includes/post_card.html' %}
                     {% endfor %}
             {% endif %}
         </div>

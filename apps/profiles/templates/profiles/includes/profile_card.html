@@ -1,7 +1,7 @@
 {% load static %}
 
-<div class="cardContainer ">
-    <div class="card position-relative ">
+<div class="cardContainer profileCardContainer">
+    <div id="profileCard" class="card position-relative ">
         <div class="image-container position-relative">
             {% if profile_picture is not None %}
                 <img src="{{ profile_picture.url }}" alt="Profile Picture">
@@ -33,6 +33,6 @@
         <!-- Settings Wheel Button -->
         {% include 'profiles/includes/profile_settings_form.html' %}
         <h2>{{ current_user.username }}</h2>
-        <p class="aboutText">{{ current_user.profile.bio }}</p>
+        <p class="aboutText">{% if current_user.profile.bio %}{{ current_user.profile.bio }}{% else %}Click on the plus sign edit your bio and profile picture!{% endif %}</p>
     </div>
 </div>

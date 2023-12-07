@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="cardContainer" id="createPostCard">
+    <form class="" action="{% url 'post_create' %}" method="GET">
+        <button type="submit" class="">
+            <div class="card">
+                <div class="image-container">
+                    <img src="{% static 'images/welcome_brain.png' %}" alt="No image available">
+                </div>
+                <h2>Create a post</h2>
+                <p class="aboutText">Use the power of the Feynman technique to cement your knowledge.</p>
+            </div>
+        </button>
+    </form>
+</div>
