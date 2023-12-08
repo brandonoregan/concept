@@ -1,5 +1,7 @@
 {% load static %}
 
+<!-- TODO: Add javascript so that the overflow-y scroll container start from the bottom instead of the top-->
+
 <!-- Banner Row -->
 <div class="row messageDisplayBannerRow">
     {% if selected_user %}
@@ -49,8 +51,6 @@
                     <p class='convoTimeGreen'>Now</p>
                 </div>
             {% endif %}
-
-        <!-- TODO For each message in messages where sender and reciver are equal, in order of date create a tab representing a message -->
     </div>
 </div>
 <!-- Reply Form -->
