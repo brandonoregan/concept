@@ -4,6 +4,6 @@ from . import views
 urlpatterns = [
     path("inbox", views.inbox, name="inbox"),
     path("inbox/<str:user_username>/", views.inbox, name="inbox_with_user"),
-    path("reply_message", views.replyMessage, name="reply_message"),
+    path("create_message", views.create_message, name="create_message"),
     path("unopened/<int:message_id>/", views.unopened, name="unopened"),
 ]

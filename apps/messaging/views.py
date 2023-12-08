@@ -17,13 +17,9 @@ from .utils import get_user_conversations, get_unique_participants, get_conversa
 from django.db import transaction
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+# TODO: Send message from admin on CustomUser/Profile creation
 
 # Create your views here.
-
-# When the inbox view is called I want to display the most recent message they've recieved
-# When message is clicked on and form is submitted I want to display that specific message
-
-# Get the most recent message and all preceding messages where the sender is the current user and the reciever id is equal to the sender
 
 
 def inbox(request, user_username=None):
@@ -96,7 +92,7 @@ def inbox(request, user_username=None):
 
 
 @transaction.atomic
-def replyMessage(request):
+def create_message(request):
     if request.method == 'POST':
         # Get form data
         message_text = request.POST.get('message')
