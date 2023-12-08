@@ -25,21 +25,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Get the most recent message and all preceding messages where the sender is the current user and the reciever id is equal to the sender
 
-# HELPER FUNCTIONS
-# HELPER FUNCTIONS
 
-def get_unique_sender(user_messages):
-    """ """
-    # Retrieve unique sender IDs from the user_messages queryset
-    unique_senders_ids = user_messages.values_list("sender", flat=True).distinct()
-
-    # Retrieve CustomUser objects for the unique sender IDs
-    unique_senders = CustomUser.objects.filter(pk__in=unique_senders_ids)
-
-    return unique_senders
-
-
-def inbox(request):
+def inbox(request, user_username=None):
     # Currently logged on user
     current_user = request.user
 
@@ -49,7 +36,10 @@ def inbox(request):
     # Get a list of unique participants from each conversation excluding user
     unique_participants = get_unique_participants(conversations, request.user)
 
-    selected_user = get_object_or_404(CustomUser, username='admin')
+    if user_username is None:
+        selected_user = get_object_or_404(CustomUser, username='admin')
+    else:
+        selected_user = get_object_or_404(CustomUser, username=user_username)
 
     # Get conversation messages between two users
     conversation = get_conversation_message_history(current_user, selected_user)
@@ -104,53 +94,16 @@ def inbox(request):
             )
 
 
-    
-
-
-# class CreateMessage(LoginRequiredMixin, CreateView):
-#     model = Message
-#     form_class = MessageForm
-#     template_name = "messaging/create_message.html"
-#     success_url = reverse_lazy("inbox")
-
-#     def form_valid(self, form):
-#         # Set the sender of the message to the current user
-#         form.instance.sender = self.request.user
-
-#         # Retrieve receiver and conversation logic
-#         receiver_id = form.instance.receiver.id
-
-#         receiver = get_object_or_404(CustomUser, id=receiver_id)  # Get receiver object
-
-#         # Your logic to create or retrieve a conversation
-#         conversation = Conversation.objects.filter(participants=self.request.user).filter(participants=receiver).first()
-
-#         if conversation:
-#             # Set the conversation for the message
-#             form.instance.conversation = conversation
-
-#             # Update the last_message timestamp of the conversation
-#             conversation.last_message = timezone.now()
-#             conversation.save()
-
-#         else:
-#             conversation = Conversation.objects.create()
-#             conversation.participants.add(self.request.user, receiver)
-#             form.instance.conversation = conversation
-
-
-#         return super().form_valid(form)
-
 
 @transaction.atomic
 def replyMessage(request):
     if request.method == 'POST':
         # Get form data
         message_text = request.POST.get('message')
-        receiver_id = request.POST.get('receiver_id')  # Assuming you have a hidden field for receiver_id in the form
+        receiver_username = request.POST.get('receiver_username')  # Assuming you have a hidden field for receiver in the form
         
         # Retrieve receiver
-        receiver = get_object_or_404(CustomUser, id=receiver_id)
+        receiver = get_object_or_404(CustomUser, username=receiver_username)
 
         # Create or retrieve conversation
         conversation = Conversation.objects.filter(participants=request.user).filter(participants=receiver).first()
@@ -170,7 +123,7 @@ def replyMessage(request):
         conversation.last_message = message.sent_at
         conversation.save()
 
-        return redirect("inbox")
+        return redirect(reverse('inbox_with_user', kwargs={'user_username': receiver_username }))
     else:
         # Handle GET requests here if needed
         pass
