@@ -12,6 +12,8 @@ from django.db.models import Q, Max, OuterRef, Subquery
 from apps.users.models import CustomUser
 from collections import OrderedDict
 from django.utils import timezone
+from django.db.models import Max
+from .utils import get_user_conversations, get_unique_participants
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -23,6 +25,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Get the most recent message and all preceding messages where the sender is the current user and the reciever id is equal to the sender
 
+# HELPER FUNCTIONS
+# HELPER FUNCTIONS
 
 def get_unique_sender(user_messages):
     """ """
@@ -35,18 +39,9 @@ def get_unique_sender(user_messages):
     return unique_senders
 
 
-# TODO
-# Get a list of most recent messages
-# Display the most recent messages in order from most recent
-# Remove all the messages where the sender is already displayed
-
-
 def inbox(request):
     # Currently logged on user
     current_user = request.user
-
-    # Store all message where the current user is the receiver
-    user_messages = Message.objects.filter(receiver=current_user).order_by("sent_at")
 
     if request.method == "POST":
         selected_username = request.POST.get("selected_username")
@@ -62,7 +57,6 @@ def inbox(request):
                 request,
                 "messaging/inbox.html",
                 {
-                    "user_messages": user_messages,
                     "current_user": current_user,
                     "selected_user": selected_user,
                     "conversation": conversation,
@@ -70,14 +64,15 @@ def inbox(request):
             )
 
     if request.method == "GET":
-        unique_senders = get_unique_sender(user_messages)
 
-        for sender in unique_senders:
-            print("Here -------------------")
-            print(sender.username)
-            print("Aswell -------------------")
-            print(sender.email)
+        # Get all user converstions in most recent order
+        conversations = get_user_conversations(request.user) 
 
+
+        # Get a list of unique participants from each conversation excluding user
+        unique_participants = get_unique_participants(conversations, request.user)
+            
+            
         # Get search query input data
         query = request.GET.get("q")
         if query:
@@ -91,17 +86,15 @@ def inbox(request):
             selected_message = get_object_or_404(Message, pk=message_id)
         else:
             selected_message = None
-            # Now 'message' object is available in the inbox view if message_id is present in the URL
 
         return render(
             request,
             "messaging/inbox.html",
             {
-                "user_messages": user_messages,
                 "current_user": current_user,
                 "matched_users": matched_users,
                 "selected_message": selected_message,
-                "unique_senders": unique_senders,
+                "unique_participants": unique_participants,
             },
         )
 
@@ -118,7 +111,6 @@ class CreateMessage(LoginRequiredMixin, CreateView):
 
         # Retrieve receiver and conversation logic
         receiver_id = form.instance.receiver.id
-        print(f'This is the id of the recevier---------------------------------------{receiver_id}') 
 
         receiver = get_object_or_404(CustomUser, id=receiver_id)  # Get receiver object
 
