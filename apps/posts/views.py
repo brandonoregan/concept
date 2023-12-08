@@ -8,12 +8,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
+
 def post_home(request):
-    recent_posts = Post.objects.order_by('-date')[0:5]
+    recent_posts = Post.objects.order_by("-date")[0:5]
     for post in recent_posts:
         print(post.id)
 
-    return render(request, "posts/post_home.html", context={"recent_posts": recent_posts})
+    return render(
+        request, "posts/post_home.html", context={"recent_posts": recent_posts}
+    )
 
 
 # Class to create a post

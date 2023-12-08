@@ -1,7 +1,18 @@
 from django.db import models
 from apps.users.models import CustomUser
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.db.models import Q
 
 # Create your models here.
+
+
+class Conversation(models.Model):
+    participants = models.ManyToManyField(CustomUser, related_name="conversations")
+    last_message = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return ", ".join(str(participant) for participant in self.participants.all())
 
 
 class Message(models.Model):
@@ -14,6 +25,9 @@ class Message(models.Model):
     text = models.TextField()
     sent_at = models.DateTimeField(auto_now_add=True)
     unopened = models.BooleanField(default=True)
+    conversation = models.ForeignKey(
+        Conversation, on_delete=models.CASCADE, related_name="messages"
+    )
 
     # Provides a string representation of an object
     def __str__(self):

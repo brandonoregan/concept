@@ -21,10 +21,10 @@ def welcome(request):
 
 class LoginUser(SuccessMessageMixin, LoginView):
     template_name = "users/login_user.html"
-    success_url = reverse_lazy('post_home')
+    success_url = reverse_lazy("post_home")
     success_message = "You were successfully logged in."
 
-    
+
 class LogoutUser(SuccessMessageMixin, LogoutView):
     next_page = reverse_lazy("welcome")
 
@@ -60,6 +60,5 @@ class RegisterUser(SuccessMessageMixin, CreateView):
 
         # # Create a Message object
         # Message.objects.create(sender=admin, receiver=user, text='Welcome to your inbox, use the search bar to find people to connect with!')
-
 
         return super().form_valid(form)

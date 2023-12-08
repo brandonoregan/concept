@@ -3,7 +3,7 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
-from .models import Message
+from .models import Message, Conversation
 from .forms import MessageForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Q, Max, OuterRef, Subquery
 from apps.users.models import CustomUser
 from collections import OrderedDict
-
+from django.utils import timezone
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -23,22 +23,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Get the most recent message and all preceding messages where the sender is the current user and the reciever id is equal to the sender
 
+
 def get_unique_sender(user_messages):
-    """ 
-    
-    """
+    """ """
     # Retrieve unique sender IDs from the user_messages queryset
-    unique_senders_ids = user_messages.values_list('sender', flat=True).distinct()
+    unique_senders_ids = user_messages.values_list("sender", flat=True).distinct()
 
     # Retrieve CustomUser objects for the unique sender IDs
     unique_senders = CustomUser.objects.filter(pk__in=unique_senders_ids)
 
     return unique_senders
 
-# TODO 
-    # Get a list of most recent messages 
-    # Display the most recent messages in order from most recent 
-    # Remove all the messages where the sender is already displayed 
+
+# TODO
+# Get a list of most recent messages
+# Display the most recent messages in order from most recent
+# Remove all the messages where the sender is already displayed
 
 
 def inbox(request):
@@ -48,38 +48,38 @@ def inbox(request):
     # Store all message where the current user is the receiver
     user_messages = Message.objects.filter(receiver=current_user).order_by("sent_at")
 
-    if request.method == 'POST':
-        selected_username = request.POST.get('selected_username')
+    if request.method == "POST":
+        selected_username = request.POST.get("selected_username")
         if selected_username:
             selected_user = get_object_or_404(CustomUser, username=selected_username)
 
             conversation = Message.objects.filter(
-            Q(sender=current_user, receiver=selected_user)
-            | Q(sender=selected_user, receiver=current_user)).order_by("sent_at")
+                Q(sender=current_user, receiver=selected_user)
+                | Q(sender=selected_user, receiver=current_user)
+            ).order_by("sent_at")
 
             return render(
-            request,
-            "messaging/inbox.html",
-            {
-                "user_messages": user_messages,
-                "current_user": current_user,
-                "selected_user": selected_user,
-                "conversation": conversation,
-            },
-        )
-    
-    if request.method == 'GET':
+                request,
+                "messaging/inbox.html",
+                {
+                    "user_messages": user_messages,
+                    "current_user": current_user,
+                    "selected_user": selected_user,
+                    "conversation": conversation,
+                },
+            )
 
+    if request.method == "GET":
         unique_senders = get_unique_sender(user_messages)
-    
+
         for sender in unique_senders:
-            print('Here -------------------')
+            print("Here -------------------")
             print(sender.username)
-            print('Aswell -------------------')
+            print("Aswell -------------------")
             print(sender.email)
-        
+
         # Get search query input data
-        query = request.GET.get('q')
+        query = request.GET.get("q")
         if query:
             matched_users = CustomUser.objects.filter(username__icontains=query)
         else:
@@ -115,14 +115,31 @@ class CreateMessage(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         # Set the sender of the message to the current user
         form.instance.sender = self.request.user
-        return super().form_valid(form)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # Add additional context data here
-    #     user_messages = Message.objects.all()
-    #     context['user_messages'] = user_messages
-    #     return context
+        # Retrieve receiver and conversation logic
+        receiver_id = form.instance.receiver.id
+        print(f'This is the id of the recevier---------------------------------------{receiver_id}') 
+
+        receiver = get_object_or_404(CustomUser, id=receiver_id)  # Get receiver object
+
+        # Your logic to create or retrieve a conversation
+        conversation = Conversation.objects.filter(participants=self.request.user).filter(participants=receiver).first()
+
+        if conversation:
+            # Set the conversation for the message
+            form.instance.conversation = conversation
+
+            # Update the last_message timestamp of the conversation
+            conversation.last_message = timezone.now()
+            conversation.save()
+
+        else:
+            conversation = Conversation.objects.create()
+            conversation.participants.add(self.request.user, receiver)
+            form.instance.conversation = conversation
+
+
+        return super().form_valid(form)
 
 
 def replyMessage(request):
