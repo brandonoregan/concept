@@ -6,7 +6,7 @@
             <h1>Inbox</h1>
         </div>
         <div class="col">
-            <form action="{% url 'create_message' %}" method="post">
+            <form action="" method="post">
                 {% csrf_token %}
                 <button type="submit"  class="btn btn-primary">New Message</button>
             </form>

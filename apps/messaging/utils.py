@@ -1,5 +1,6 @@
 from django.db.models import Max
-from .models import Conversation
+from .models import Conversation, Message
+from django.db.models import Q
 
 
 def get_user_conversations(user):
@@ -30,3 +31,13 @@ def get_unique_participants(conversations, user):
     unique_participants = list(set(other_participants_list))
 
     return unique_participants
+
+
+def get_conversation_message_history(user1, user2):
+    """
+    Retrieve conversation messages between two users
+    """
+    return Message.objects.filter(
+        Q(sender=user1, receiver=user2) |
+        Q(sender=user2, receiver=user1)
+    ).order_by("sent_at")
