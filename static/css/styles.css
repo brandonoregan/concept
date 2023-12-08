@@ -7,6 +7,9 @@
     --primary-blue: #1987ff;
     --primary-grey: #cccccc;
 
+    --secondary-blue: #1988ff9d;
+    --secondary-grey: rgb(231, 227, 227);
+
     --secondary-fade: rgba(0, 0, 0, 0.02);
 
 }

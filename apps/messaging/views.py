@@ -43,36 +43,14 @@ def inbox(request):
     # Currently logged on user
     current_user = request.user
 
-    if request.method == "POST":
-        selected_username = request.POST.get("selected_username")
-        if selected_username:
-            selected_user = get_object_or_404(CustomUser, username=selected_username)
+    # Get all user converstions in most recent order
+    conversations = get_user_conversations(request.user) 
 
-            conversation = Message.objects.filter(
-                Q(sender=current_user, receiver=selected_user)
-                | Q(sender=selected_user, receiver=current_user)
-            ).order_by("sent_at")
-
-            return render(
-                request,
-                "messaging/inbox.html",
-                {
-                    "current_user": current_user,
-                    "selected_user": selected_user,
-                    "conversation": conversation,
-                },
-            )
+    # Get a list of unique participants from each conversation excluding user
+    unique_participants = get_unique_participants(conversations, request.user)
 
     if request.method == "GET":
 
-        # Get all user converstions in most recent order
-        conversations = get_user_conversations(request.user) 
-
-
-        # Get a list of unique participants from each conversation excluding user
-        unique_participants = get_unique_participants(conversations, request.user)
-            
-            
         # Get search query input data
         query = request.GET.get("q")
         if query:
@@ -97,6 +75,30 @@ def inbox(request):
                 "unique_participants": unique_participants,
             },
         )
+
+    if request.method == "POST":
+        selected_username = request.POST.get("selected_username")
+        if selected_username:
+            selected_user = get_object_or_404(CustomUser, username=selected_username)
+
+            conversation = Message.objects.filter(
+                Q(sender=current_user, receiver=selected_user)
+                | Q(sender=selected_user, receiver=current_user)
+            ).order_by("sent_at")
+
+            return render(
+                request,
+                "messaging/inbox.html",
+                {
+                    "current_user": current_user,
+                    "selected_user": selected_user,
+                    "conversation": conversation,
+                    "unique_participants": unique_participants,
+                },
+            )
+
+
+    
 
 
 class CreateMessage(LoginRequiredMixin, CreateView):

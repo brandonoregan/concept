@@ -2,55 +2,50 @@
 
 <!-- Banner Row -->
 <div class="row messageDisplayBannerRow">
-    <!-- Profile Picture Col -->
-    <div class="col">
-        {% if most_recent_message.sender.profile.profile_picture %}
-            <img src="{{ display_message.sender.profile.profile_picture.url }}" alt="Sender Profile Picture">
-            {% else %}
-            <img src="{% static 'images/no-image.jpg' %}" alt="No image">
-        {% endif %}
-    </div>
-    <!-- User Information -->
-    <div class="col">
-        {% if most_recent_message %}
-        <h3>{{ most_recent_message.sender }}</h3>
-        {% elif selected_user %}
-        <h3>{{ selected_user }}</h3>
-        {% endif %}
-    </div>
+    {% if selected_user %}
+        <!-- Profile Picture Col -->
+        <div class="col flex-grow-0 ">
+            {% if selected_user.profile.profile_picture %}
+                <img src="{{ selected_user.profile.profile_picture.url }}" alt="Sender Profile Picture">
+                {% else %}
+                <img src="{% static 'images/no-image.jpg' %}" alt="No image">
+            {% endif %}
+        </div>
+        <div class="col">
+            <h3>{{ selected_user }}</h3>
+        </div>
+    {% endif %}
 </div>
 <!-- Display Message Content and History -->
 <div class="row convoContainer">
-    <div class="col">
+    <div class="col messageHistorySection">
             <!-- If there is a conversation beween current user and the searched user from search bar. -->
             {% if conversation %}
                 {% for message in conversation %}
                     {% if message.sender == current_user %}
-                        <div class="border messageGreen text-end w-100 ms-auto">
-                            <p class="convoSenderGreen">{{ message.sender }}</p>
-                            <p class="convoContentGreen">{{ message.text }}</p>
+                        <div class="message yourMessage text-end w-100 ms-auto">
+                            <p class="yourMessageContent">{{ message.text }}</p>
                             {% if message.sent_at|time:"H" < "12" %}
-                                <p class='convoTimeGreen'>{{ message.sent_at|time:"h:i A" }}</p>
+                                <p class='sentTime'>{{ message.sent_at|time:"h:i A" }}</p>
                             {% else %}
-                                <p>{{ message.sent_at|time:"h:i A" }}</p>
+                                <p class='sentTime'>{{ message.sent_at|time:"h:i A" }}</p>
                             {% endif %}
                         </div>
                     {% else %}
-                        <div class="border messageBlue">
-                            <p class="convoSender">{{ message.sender }}</p>
-                            <p class="convoContent">{{ message.text }}</p>
+                        <div class="message messageBlue">
+                            <p class="messageContent">{{ message.text }}</p>
                             {% if message.sent_at|time:"H" < "12" %}
-                                <p class='convoTime'>{{ message.sent_at|time:"h:i A" }}</p>
+                                <p class='sentTime'>{{ message.sent_at|time:"h:i A" }}</p>
                             {% else %}
-                                <p>{{ message.sent_at|time:"h:i A" }}</p>
+                                <p class='sentTime'>{{ message.sent_at|time:"h:i A" }}</p>
                             {% endif %}
                         </div>
                     {% endif %}
                 {% endfor %}
             {% else %}
-                <div class="border messageGreen text-end w-100 ms-auto">
-                    <p class="convoSenderGreen">{{ selected_user.username }}</p>
-                    <p class="convoContentGreen">Be the first to say hello</p>
+                <div class="message ">
+                    <p>Admin</p>
+                    <p class="messageContent">Be the first to say hello</p>
                     <p class='convoTimeGreen'>Now</p>
                 </div>
             {% endif %}
@@ -64,7 +59,7 @@
             <form method="post" action="{% url 'reply_message' %}" class="form-container">
                 {% csrf_token %}
                 <textarea name="message" placeholder="Enter your message"></textarea>
-                <button type="submit" class="btn btn-primary">Send</button>
+                <button type="submit" class="btn btn-outline-secondary border-0 ">Send</button>
             </form>
     </div>
 </div>

@@ -3,7 +3,7 @@
 <div class="container">
     <div class="row mt-3">
         <div class="col">
-            <h3>Inbox</h3>
+            <h1>Inbox</h1>
         </div>
         <div class="col">
             <form action="{% url 'create_message' %}" method="post">
@@ -13,8 +13,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
-            <!-- your_template.html -->
+        <div class="col ps-0 pe-0 ">
             <form action="{% url 'inbox' %}" method="get">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"
