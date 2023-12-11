@@ -126,6 +126,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
 STATIC_URL = "static/"
 
 # Define the directory where your static files are collected
@@ -136,6 +137,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "apps/messaging/static"),
     os.path.join(BASE_DIR, "apps/profiles/static"),
 ]
+
+# This tells django to look in the given path in the base directory for the path given in the upload_to= in the models definition
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "user-media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -152,7 +157,7 @@ AUTH_USER_MODEL = (
 
 LOGIN_URL = "login_user"  # Successful login redirection needs to be changed or else is will automatically redirect to accounts/login/
 
-LOGIN_REDIRECT_URL = "welcome"  # Successful login refirection needs to be changed or else is will automatically redirect to accounts/login/
+LOGIN_REDIRECT_URL = "post_home"  # Successful login refirection needs to be changed or else is will automatically redirect to accounts/login/
 
 LOGOUT_REDIRECT_URL = "welcome"  # Replace with the desired URL
 
@@ -166,6 +171,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 
-# This tells django to look in the given path in the base directory for the path given in the upload_to= in the models definition
-MEDIA_ROOT = BASE_DIR / "media"
-MEDIA_URL = "user-media/"
+

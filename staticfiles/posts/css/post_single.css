@@ -1,0 +1,71 @@
+body {
+  background-color: var(--primary-blue);
+}
+
+.navbar {
+  background-color: white;
+}
+
+.postCol {
+  background-color: white;
+  max-width: 900px;
+  margin: 2rem;
+  border-radius: 1rem;
+  border: 2px solid black;
+  box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.4);
+  padding: 1.5rem;
+}
+
+.imageContainer{
+  max-height: 20rem;
+  max-width: 20rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 2px solid black;
+  margin: 0 1rem 1rem 1rem;
+  float: right;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+h2 {
+  opacity: .8;
+  font-size: 1.5rem;
+}
+
+p {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.authorRow p {
+  font-weight: 700;
+}
+
+.authorImageContainer {
+  height: 5rem;
+  width: 5rem;
+}
+
+.authorImageContainer img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid black;
+}
+
+.authorRow {
+  height: 5rem;
+  margin: 1rem 0 0 0;
+}

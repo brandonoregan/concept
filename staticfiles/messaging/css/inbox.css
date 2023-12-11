@@ -1,0 +1,186 @@
+.mainRow {
+    margin: 2rem 0rem;
+    /* min-height: calc(100vh - 4rem); */
+}
+/* All Messagegs */
+/* All Messagegs */
+
+/* Left panel containing all messages */
+.messagesContainer {
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: white;
+}
+
+.messagesContainer img {
+    width: 5rem;
+    height: 5rem;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+/* Individual message in message container */
+.messageCell {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 3px;
+    
+}
+
+.unreadMessage {
+    background-color: lightgray;
+}
+
+.messageScrollContainer {
+    /* border: 1px solid black; */
+    overflow-y: hidden;
+    border-radius: 5px;
+}
+
+/* display_message.html */
+/* display_message.html */
+
+
+.displayMessageContainer {
+    background-color: lightgray;
+    padding: 1rem 3rem;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: white;
+}
+
+.messageDisplayBannerRow {
+    width: 100%;
+    border-bottom: 1px solid grey;
+    background-color: white;
+    padding: 3px;
+    padding-bottom: .3rem;
+    display: flex;
+    align-items: end;
+}
+
+.messageDisplayBannerRow img {
+    width: 5rem;
+    height: 5rem;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.messageDisplayBannerRow h3 {
+    margin-left: .5rem;
+    font-weight: 700;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+/* message history */
+/* message history */
+
+.convoContainer {
+    overflow-y: scroll;
+    max-height: 100%;
+    height: 25rem;
+}
+
+.messageHistorySection {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+    width: 100%;
+}
+
+.messageContent {
+    background-color: var(--primary-blue);
+    padding: .5rem;
+    display: inline-block;
+    max-width: 90%;
+    border-radius: 1rem 1rem 1rem 0;
+    color: white;
+}
+
+.yourMessageContent {
+    background-color: var(--secondary-grey);
+    padding: .5rem;
+    display: inline-block;
+    max-width: 90%;
+    border-radius: 1rem 1rem 0 1rem;
+}
+
+.message {
+    padding: 1rem;
+
+}
+
+.message p {
+    margin: 0;
+}
+
+.yourMessage {
+    margin-left: auto;
+}
+
+.sentTime {
+    font-size: .8rem;
+}
+
+
+
+
+/* Reply section */
+/* Reply section */
+
+.replyMessage {
+    height: 6rem;
+    background-color: var(--secondary-grey);
+    border-radius: 10px;
+}
+
+.replyMessage button{
+    align-self: flex-end;
+}
+
+.form-container {
+    display: flex;
+    justify-content: space-between; /* To create space between elements */
+    align-items: center; /* Align items vertically in the center */
+    margin: .5rem 0 ;
+    border: none;
+}
+
+.form-container textarea {
+    height: 5rem;
+    background-color: var(--secondary-grey);
+    flex: 1; /* Take up remaining space */
+    resize: none; /* Disable textarea resize handle */
+    padding: 5px; 
+    /* Adjust padding as needed */
+    margin-right: 10px; /* Add margin between textarea and button */
+    border: none;
+    overflow-y: hidden;
+    outline: none;
+}
+
+/* Scroll bar */
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--primary-blue); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0.4); 
+}

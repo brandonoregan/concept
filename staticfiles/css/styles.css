@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&family=Poppins&display=swap");
+
+:root {
+
+    /* Custom colours */
+    --primary-pink: #f2aeb1;
+    --primary-blue: #1987ff;
+    --primary-grey: #cccccc;
+
+    --secondary-blue: #1988ff9d;
+    --secondary-grey: rgb(231, 227, 227);
+
+    --secondary-fade: rgba(0, 0, 0, 0.02);
+
+}
+
+body {
+    background-color: var(--primary-blue);
+}
+/* Navbar */
+/* Navbar */
+
+header {
+    margin: 0;
+    padding: 0;
+
+}
+
+.navbar {
+    background-color: white;
+}
+
+.navLogo {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 3px;
+}
+
+.navLogo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
+}
+
+.navbarLogoText {
+    font-weight: 900;
+}
+
+/* Footer */
+/* Footer */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--secondary-fade);
+}
+
+
+
