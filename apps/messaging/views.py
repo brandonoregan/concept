@@ -12,10 +12,13 @@ from django.db.models import Q, Max, OuterRef, Subquery
 from apps.users.models import CustomUser
 from collections import OrderedDict
 from django.utils import timezone
-from django.db.models import Max
-from .utils import get_user_conversations, get_unique_participants, get_conversation_message_history
 from django.db import transaction
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .utils import (
+    get_user_conversations,
+    get_unique_participants,
+    get_conversation_message_history,
+)
 
 # TODO: Send message from admin on CustomUser/Profile creation
 
@@ -27,13 +30,13 @@ def inbox(request, user_username=None):
     current_user = request.user
 
     # Get all user converstions in most recent order
-    conversations = get_user_conversations(request.user) 
+    conversations = get_user_conversations(request.user)
 
     # Get a list of unique participants from each conversation excluding user
     unique_participants = get_unique_participants(conversations, request.user)
 
     if user_username is None:
-        selected_user = get_object_or_404(CustomUser, username='admin')
+        selected_user = get_object_or_404(CustomUser, username="admin")
     else:
         selected_user = get_object_or_404(CustomUser, username=user_username)
 
@@ -41,7 +44,6 @@ def inbox(request, user_username=None):
     conversation = get_conversation_message_history(current_user, selected_user)
 
     if request.method == "GET":
-
         # Get search query input data
         query = request.GET.get("q")
         if query:
@@ -65,7 +67,7 @@ def inbox(request, user_username=None):
                 "selected_message": selected_message,
                 "unique_participants": unique_participants,
                 "selected_user": selected_user,
-                'conversation': conversation,
+                "conversation": conversation,
             },
         )
 
@@ -76,7 +78,6 @@ def inbox(request, user_username=None):
 
             # Get conversation messages between two users
             conversation = get_conversation_message_history(current_user, selected_user)
-        
 
             return render(
                 request,
@@ -90,19 +91,24 @@ def inbox(request, user_username=None):
             )
 
 
-
 @transaction.atomic
 def create_message(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         # Get form data
-        message_text = request.POST.get('message')
-        receiver_username = request.POST.get('receiver_username')  # Assuming you have a hidden field for receiver in the form
-        
+        message_text = request.POST.get("message")
+        receiver_username = request.POST.get(
+            "receiver_username"
+        )  # Assuming you have a hidden field for receiver in the form
+
         # Retrieve receiver
         receiver = get_object_or_404(CustomUser, username=receiver_username)
 
         # Create or retrieve conversation
-        conversation = Conversation.objects.filter(participants=request.user).filter(participants=receiver).first()
+        conversation = (
+            Conversation.objects.filter(participants=request.user)
+            .filter(participants=receiver)
+            .first()
+        )
         if not conversation:
             conversation = Conversation.objects.create()
             conversation.participants.add(request.user, receiver)
@@ -112,14 +118,16 @@ def create_message(request):
             sender=request.user,
             receiver=receiver,
             text=message_text,
-            conversation=conversation
+            conversation=conversation,
         )
 
         # Update the last_message timestamp of the conversation
         conversation.last_message = message.sent_at
         conversation.save()
 
-        return redirect(reverse('inbox_with_user', kwargs={'user_username': receiver_username }))
+        return redirect(
+            reverse("inbox_with_user", kwargs={"user_username": receiver_username})
+        )
     else:
         # Handle GET requests here if needed
         pass

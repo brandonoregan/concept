@@ -56,22 +56,27 @@ class RegisterUser(SuccessMessageMixin, CreateView):
         login(self.request, user)
 
         # Fetch the admin Custom User Object
-        admin = CustomUser.objects.get(username='admin')
+        admin = CustomUser.objects.get(username="admin")
 
         # Create or retrieve conversation between admin and the new user
-        conversation = Conversation.objects.filter(participants=user).filter(participants=admin).first()
+        conversation = (
+            Conversation.objects.filter(participants=user)
+            .filter(participants=admin)
+            .first()
+        )
         if not conversation:
             conversation = Conversation.objects.create()
             conversation.participants.add(user, admin)
 
-        welcome_text = 'Welcome to your inbox! Use the search bar to find people to connect with, or even chat to me!'
+        welcome_text = "Welcome to your inbox! Use the search bar to find people to connect with, or even chat to me!"
 
         # Create a welcome message from admin to the newly registered user
-        message = Message.objects.create(sender=admin, receiver=user, text=welcome_text, conversation=conversation)
+        message = Message.objects.create(
+            sender=admin, receiver=user, text=welcome_text, conversation=conversation
+        )
 
         # Update the last_message timestamp of the conversation
         conversation.last_message = message.sent_at
         conversation.save()
-
 
         return super().form_valid(form)

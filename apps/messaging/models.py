@@ -50,9 +50,9 @@ class Message(models.Model):
 #             conversation.participants.add(request.user, receiver)
 
 #         message = Message.objects.create(
-#             sender=admin, 
-#             receiver=instance, 
-#             text=welcome_text, 
+#             sender=admin,
+#             receiver=instance,
+#             text=welcome_text,
 #             conversation=conversation
 #         )
 
