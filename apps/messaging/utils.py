@@ -40,3 +40,21 @@ def get_conversation_message_history(user1, user2):
     return Message.objects.filter(
         Q(sender=user1, receiver=user2) | Q(sender=user2, receiver=user1)
     ).order_by("sent_at")
+
+
+def get_unique_participants_with_last_message_read_status(current_user, unique_participants):
+    """
+    Returns a dictionary of the unique users and the read status of the last message between the current_user
+    """
+    unique_participants_with_read = {}
+    for participant in unique_participants:
+        conversation = get_conversation_message_history(current_user, participant)
+        # Fetch the last message in the conversation if it exists
+        last_message = conversation.last() if conversation.exists() else None
+        
+        # Check if the last message was received by the current user and if it is read.
+        if last_message and last_message.receiver_id == current_user.id and last_message.unopened == True:
+            unique_participants_with_read[participant] = True
+        else:
+            unique_participants_with_read[participant] = False
+    return unique_participants_with_read

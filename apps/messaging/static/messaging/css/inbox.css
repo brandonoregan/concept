@@ -24,11 +24,11 @@
     border: 1px solid black;
     border-radius: 5px;
     margin-top: 3px;
-    
+    background-color: lightgrey;
 }
 
 .unreadMessage {
-    background-color: lightgray;
+    background-color: white;
 }
 
 .rowScrollContainer {

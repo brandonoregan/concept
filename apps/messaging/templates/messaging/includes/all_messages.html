@@ -27,7 +27,33 @@
                     {% for user in matched_users %}
                         <form action="{% url 'inbox' %}" method="post">
                             {% csrf_token %}
-                            <div id="messageCell" class="row p-2 {% if message.unopened == False %}unreadMessage {% endif %} messageCell">
+                            <button class="w-100 border-0" name="selected_username" value="{{ user.username }}" type="submit">
+                                <div id="messageCell" class="row p-2 {% if message.unopened == False %}unreadMessage {% endif %} messageCell">
+                                    <div class="col-auto">
+                                        {% if user.profile.profile_picture %}
+                                            <img src="{{ user.profile.profile_picture.url }}" alt="Sender Profile Picture">
+                                            {% else %}
+                                            <img src="{% static 'images/no-image.jpg' %}" alt="No image">
+                                        {% endif %}
+                                    </div>
+                                    <div class="col">
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>{{ user.username }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </button>
+                        </form>
+                    {% endfor %}
+                </div>
+            {% elif unique_participants_with_read %}
+                {% for user, read_status in unique_participants_with_read.items %}
+                    <form action="{% url 'inbox' %}" method="post">
+                        {% csrf_token %}
+                        <button class=" w-100 border-0 " name="selected_username" value="{{ user.username }}" type="submit">
+                            <div id="messageCell" class="row p-2 {% if read_status == True %}unreadMessage {% endif %} messageCell">
                                 <div class="col-auto">
                                     {% if user.profile.profile_picture %}
                                         <img src="{{ user.profile.profile_picture.url }}" alt="Sender Profile Picture">
@@ -39,35 +65,11 @@
                                     <div class="row">
                                         <div class="col">
                                             <p>{{ user.username }}</p>
-                                            <button class="btn btn-primary" name="selected_username" value="{{ user.username }}" type="submit">Open</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    {% endfor %}
-                </div>
-            {% elif unique_participants %}
-                {% for user in unique_participants %}
-                    <form action="{% url 'inbox' %}" method="post">
-                        {% csrf_token %}
-                        <div id="messageCell" class="row p-2 {% if message.unopened == False %}unreadMessage {% endif %} messageCell">
-                            <div class="col-auto">
-                                {% if user.profile.profile_picture %}
-                                    <img src="{{ user.profile.profile_picture.url }}" alt="Sender Profile Picture">
-                                    {% else %}
-                                    <img src="{% static 'images/no-image.jpg' %}" alt="No image">
-                                {% endif %}
-                            </div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <p>{{ user.username }}</p>
-                                        <button class="btn btn-primary" name="selected_username" value="{{ user.username }}" type="submit">Open</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </button>
                     </form>
                 {% endfor %}
             {% else %}

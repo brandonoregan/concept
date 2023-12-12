@@ -18,6 +18,7 @@ from .utils import (
     get_user_conversations,
     get_unique_participants,
     get_conversation_message_history,
+    get_unique_participants_with_last_message_read_status
 )
 
 # TODO: Send message from admin on CustomUser/Profile creation
@@ -42,6 +43,10 @@ def inbox(request, user_username=None):
 
     # Get conversation messages between two users
     conversation = get_conversation_message_history(current_user, selected_user)
+    
+    # returns a dictionary with each unique participant and the read status of the last message between current user
+    unique_participants_with_read = get_unique_participants_with_last_message_read_status(current_user, unique_participants)
+    
 
     if request.method == "GET":
         # Get search query input data
@@ -65,19 +70,27 @@ def inbox(request, user_username=None):
                 "current_user": current_user,
                 "matched_users": matched_users,
                 "selected_message": selected_message,
-                "unique_participants": unique_participants,
                 "selected_user": selected_user,
                 "conversation": conversation,
+                "unique_participants_with_read": unique_participants_with_read,
             },
         )
 
     if request.method == "POST":
+
         selected_username = request.POST.get("selected_username")
+
         if selected_username:
             selected_user = get_object_or_404(CustomUser, username=selected_username)
 
             # Get conversation messages between two users
             conversation = get_conversation_message_history(current_user, selected_user)
+
+            last_message = conversation.last()
+
+            if last_message and last_message.receiver == current_user:
+                last_message.unopened = False
+                last_message.save()
 
             return render(
                 request,
@@ -86,7 +99,7 @@ def inbox(request, user_username=None):
                     "current_user": current_user,
                     "selected_user": selected_user,
                     "conversation": conversation,
-                    "unique_participants": unique_participants,
+                    "unique_participants_with_read": unique_participants_with_read,
                 },
             )
 
@@ -109,6 +122,7 @@ def create_message(request):
             .filter(participants=receiver)
             .first()
         )
+
         if not conversation:
             conversation = Conversation.objects.create()
             conversation.participants.add(request.user, receiver)
@@ -133,18 +147,21 @@ def create_message(request):
         pass
 
 
+
+
 def unopened(request, message_id):
-    # Get message object that is associciated with message_id
-    message = get_object_or_404(Message, pk=message_id)
+    if request.method == 'POST':    
+        # Get message object that is associciated with message_id
+        message = get_object_or_404(Message, pk=message_id)
 
-    # Mark message as read if unread/False
-    if message.unopened == False:
-        message.unopened = True
-        message.save()
+        # Mark message as read if unread/False
+        if message.unopened == False:
+            message.unopened = True
+            message.save()
 
-    redirect_url = reverse("inbox")
+        redirect_url = reverse("inbox")
 
-    if message_id:
-        redirect_url += f"?message_id={message_id}"
+        if message_id:
+            redirect_url += f"?message_id={message_id}"
 
-    return HttpResponseRedirect(redirect_url)
+        return HttpResponseRedirect(redirect_url)
