@@ -48,12 +48,12 @@
                         </form>
                     {% endfor %}
                 </div>
-            {% elif unique_participants_with_read %}
-                {% for user, read_status in unique_participants_with_read.items %}
+            {% elif recent_messages %}
+                {% for user, last_message in recent_messages.items %}
                     <form action="{% url 'inbox' %}" method="post">
                         {% csrf_token %}
                         <button class=" w-100 border-0 " name="selected_username" value="{{ user.username }}" type="submit">
-                            <div id="messageCell" class="row p-2 {% if read_status == True %}unreadMessage {% endif %} messageCell">
+                            <div id="messageCell" class="row p-2 {% if last_message.read == False and last_message.receiver_id == current_user %}unreadMessage {% endif %} messageCell">
                                 <div class="col-auto">
                                     {% if user.profile.profile_picture %}
                                         <img src="{{ user.profile.profile_picture.url }}" alt="Sender Profile Picture">

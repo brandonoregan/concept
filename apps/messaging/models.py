@@ -24,7 +24,7 @@ class Message(models.Model):
     )
     text = models.TextField()
     sent_at = models.DateTimeField(auto_now_add=True)
-    unopened = models.BooleanField(default=True)
+    read = models.BooleanField(default=False)
     conversation = models.ForeignKey(
         Conversation, on_delete=models.CASCADE, related_name="messages"
     )
@@ -32,7 +32,6 @@ class Message(models.Model):
     # Provides a string representation of an object
     def __str__(self):
         return f"{self.sender} -> {self.receiver}: {self.text}"
-
 
 # @receiver(post_save, sender=CustomUser)
 # def welcome_message(sender, instance, created, **kwargs):

@@ -1,6 +1,7 @@
 from django.db.models import Max
 from .models import Conversation, Message
 from django.db.models import Q
+from collections import OrderedDict
 
 
 def get_user_conversations(user):
@@ -42,19 +43,22 @@ def get_conversation_message_history(user1, user2):
     ).order_by("sent_at")
 
 
-def get_unique_participants_with_last_message_read_status(current_user, unique_participants):
+def get_recent_messages(current_user, unique_participants):
     """
-    Returns a dictionary of the unique users and the read status of the last message between the current_user
+    Returns a dictionary of the unique users and the last message between the current_user ordered by last message sent
     """
-    unique_participants_with_read = {}
+    unordered_dict = {}
+
     for participant in unique_participants:
         conversation = get_conversation_message_history(current_user, participant)
+
         # Fetch the last message in the conversation if it exists
         last_message = conversation.last() if conversation.exists() else None
         
-        # Check if the last message was received by the current user and if it is read.
-        if last_message and last_message.receiver_id == current_user.id and last_message.unopened == True:
-            unique_participants_with_read[participant] = True
-        else:
-            unique_participants_with_read[participant] = False
-    return unique_participants_with_read
+        unordered_dict[participant] = last_message
+    
+    ordered_dict = OrderedDict(sorted(unordered_dict.items(), key=lambda x: x[1].sent_at if x[1] else None, reverse=True))
+
+    return ordered_dict
+
+# Create a read-status model

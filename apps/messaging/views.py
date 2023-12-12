@@ -18,7 +18,7 @@ from .utils import (
     get_user_conversations,
     get_unique_participants,
     get_conversation_message_history,
-    get_unique_participants_with_last_message_read_status
+    get_recent_messages
 )
 
 # TODO: Send message from admin on CustomUser/Profile creation
@@ -44,8 +44,9 @@ def inbox(request, user_username=None):
     # Get conversation messages between two users
     conversation = get_conversation_message_history(current_user, selected_user)
     
-    # returns a dictionary with each unique participant and the read status of the last message between current user
-    unique_participants_with_read = get_unique_participants_with_last_message_read_status(current_user, unique_participants)
+    
+    recent_messages = get_recent_messages(current_user, unique_participants)
+
     
 
     if request.method == "GET":
@@ -72,7 +73,7 @@ def inbox(request, user_username=None):
                 "selected_message": selected_message,
                 "selected_user": selected_user,
                 "conversation": conversation,
-                "unique_participants_with_read": unique_participants_with_read,
+                "recent_messages": recent_messages,
             },
         )
 
@@ -89,7 +90,7 @@ def inbox(request, user_username=None):
             last_message = conversation.last()
 
             if last_message and last_message.receiver == current_user:
-                last_message.unopened = False
+                last_message.read = True
                 last_message.save()
 
             return render(
@@ -99,7 +100,7 @@ def inbox(request, user_username=None):
                     "current_user": current_user,
                     "selected_user": selected_user,
                     "conversation": conversation,
-                    "unique_participants_with_read": unique_participants_with_read,
+                    "recent_messages": recent_messages,
                 },
             )
 
