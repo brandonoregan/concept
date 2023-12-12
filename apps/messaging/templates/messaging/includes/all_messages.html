@@ -5,18 +5,12 @@
         <div class="col">
             <h1>Inbox</h1>
         </div>
-        <div class="col">
-            <form action="" method="post">
-                {% csrf_token %}
-                <button type="submit"  class="btn btn-primary">New Message</button>
-            </form>
-        </div>
     </div>
     <div class="row">
         <div class="col ps-0 pe-0 ">
             <form action="{% url 'inbox' %}" method="get">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2"
+                    <input type="text" class="form-control" placeholder="Search username" aria-label="Recipient's username" aria-describedby="basic-addon2"
                     name="q" id="searchInput" autocomplete="off" placeholder="Search...">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="submit">Search</button>
@@ -26,8 +20,8 @@
         </div>
     </div>
     <!-- Messages Scroll Container -->
-    <div class="row mt-3 mb-3 messageScrollContainer">
-        <div class="col border">
+    <div class="row mt-3 mb-3 rowScrollContainer custom-scrollbar">
+        <div class="col border mh-100 messageScrollContainer">
             {% if matched_users %}
                 <div id="searchResults">
                     {% for user in matched_users %}
