@@ -30,6 +30,11 @@ header {
     background-color: white;
 }
 
+.navbarContainer {
+    max-width: 1100px;
+}
+
+
 .navLogo {
     height: 3rem;
     width: 3rem;
@@ -44,6 +49,16 @@ header {
 
 .navbarLogoText {
     font-weight: 900;
+}
+
+.nav-item a {
+    font-weight: 600;
+}
+
+.nav-item a:hover {
+    font-weight: 600;
+    transform: scale(1.4);
+    text-shadow: #1987ff;
 }
 
 /* Footer */
