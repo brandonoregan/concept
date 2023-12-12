@@ -7,7 +7,7 @@
                 {% if post.post_image %}
                     <img src="{{ post.post_image.url }}" alt="Post Image">
                 {% else %}
-                    <img src="{% static 'images/no-image.jpg' %}" alt="No image available">
+                <img src="{% static 'images/person-circle.svg' %}" alt="">
                 {% endif %}
             </div>
             <h2>{{ post.title }}</h2>

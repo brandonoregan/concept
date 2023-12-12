@@ -10,7 +10,7 @@
             {% if selected_user.profile.profile_picture %}
                 <img src="{{ selected_user.profile.profile_picture.url }}" alt="Sender Profile Picture">
                 {% else %}
-                <img src="{% static 'images/no-image.jpg' %}" alt="No image">
+                <img src="{% static 'images/person-circle.svg' %}" alt="">
             {% endif %}
         </div>
         <div class="col">
