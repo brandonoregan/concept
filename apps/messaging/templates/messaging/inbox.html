@@ -13,13 +13,13 @@
 
 {% block content %}
     <div class="container-fluid">
-        <div class="row justify-content-center mainRow">
+        <div class="row d-flex  justify-content-center flex-wrap  mainRow">
             <!-- All Messages -->
-            <div class="col col-md-4 me-2 messagesContainer ">
+            <div class="col-4 me-2 mb-2  messagesContainer justify-content-center  flex-grow-1 ">
                 {% include 'messaging/includes/all_messages.html' %}
             </div>
             <!-- Message Display -->
-            <div class="col col-md-7 displayMessageContainer">
+            <div class="col-7 flex-grow-1  mb-2  me-2  displayMessageContainer justify-content-center">
                 {% include 'messaging/includes/display_message.html' %}
             </div>
         </div>

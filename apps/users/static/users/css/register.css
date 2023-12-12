@@ -3,12 +3,13 @@
     border-radius: 1rem;
     box-shadow: 5px 2px 5px 2px;
     margin: 1.5rem 3rem; */
+
     background-color: var(--primary-blue);
-    min-height: calc(100vh - 4rem);
 }
 
 .registerForm {
     border-radius: 1rem;
+    min-width: 320px;
 }
 
 .registerForm h3{
@@ -32,6 +33,9 @@
 .registerImageContainer {
     height: 100%;
     padding: 2rem;
+    min-width: 340px;
+    display: flex;
+    flex-wrap: wrap-reverse;
 }
 
 .registerImageContainer img {
@@ -72,3 +76,31 @@ input:hover {
 .submitButton:hover {
     border: white;
 }
+
+/* Title over hero logo */
+.overlay-text {
+    position: absolute;
+    top: 50%; /* Position the text at the vertical center */
+    left: 50%; /* Position the text at the horizontal center */
+    transform: translate(-50%, -35%); /* Center the text precisely */
+    z-index: 1; /* Ensure the text appears above the image */
+    font-weight: 900;
+    font-size: 5rem;
+    letter-spacing: 7px;
+    text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+    color: white;
+}
+
+
+/* media queries */
+/* media queries */
+
+/* Extra large devices (large desktops) */
+@media (max-width: 450px) {
+
+    .rightCol {
+        padding: 0 1rem;
+    }
+
+  }
+  

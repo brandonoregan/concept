@@ -25,47 +25,45 @@
             {% if matched_users %}
                 <div id="searchResults">
                     {% for user in matched_users %}
-                        <form action="{% url 'inbox' %}" method="post">
-                            {% csrf_token %}
-                            <button class="w-100 border-0" name="selected_username" value="{{ user.username }}" type="submit">
-                                <div id="messageCell" class="row p-2 {% if message.unopened == False %}unreadMessage {% endif %} messageCell">
-                                    <div class="col-auto">
+                    <form action="{% url 'inbox' %}" method="post">
+                        {% csrf_token %}
+                        <button class="w-100 border-0" name="selected_username" value="{{ user.username }}" type="submit">
+                            <div id="messageCell" class="row p-2
+                            messageCell {% if last_message.read == False and last_message.receiver_id == current_user %}unreadMessage {% endif %}">
+                                <div class="flexContianer w-100 d-flex align-items-baseline   ">
+                                    <div class="">
                                         {% if user.profile.profile_picture %}
                                             <img src="{{ user.profile.profile_picture.url }}" alt="Sender Profile Picture">
                                             {% else %}
                                             <img src="{% static 'images/no-image.jpg' %}" alt="No image">
                                         {% endif %}
                                     </div>
-                                    <div class="col">
-                                        <div class="row">
-                                            <div class="col">
-                                                <p>{{ user.username }}</p>
-                                            </div>
-                                        </div>
+                                    <div class="ms-auto me-auto ">
+                                        <p class="userUsername">{{ user.username }}</p>
                                     </div>
                                 </div>
-                            </button>
-                        </form>
+                            </div>
+                        </button>
+                    </form>
                     {% endfor %}
                 </div>
             {% elif recent_messages %}
                 {% for user, last_message in recent_messages.items %}
                     <form action="{% url 'inbox' %}" method="post">
                         {% csrf_token %}
-                        <button class=" w-100 border-0 " name="selected_username" value="{{ user.username }}" type="submit">
-                            <div id="messageCell" class="row p-2 {% if last_message.read == False and last_message.receiver_id == current_user %}unreadMessage {% endif %} messageCell">
-                                <div class="col-auto">
-                                    {% if user.profile.profile_picture %}
-                                        <img src="{{ user.profile.profile_picture.url }}" alt="Sender Profile Picture">
-                                        {% else %}
-                                        <img src="{% static 'images/no-image.jpg' %}" alt="No image">
-                                    {% endif %}
-                                </div>
-                                <div class="col">
-                                    <div class="row">
-                                        <div class="col">
-                                            <p>{{ user.username }}</p>
-                                        </div>
+                        <button class="w-100 border-0" name="selected_username" value="{{ user.username }}" type="submit">
+                            <div id="messageCell" class="row p-2
+                            messageCell {% if last_message.read == False and last_message.receiver_id == current_user %}unreadMessage {% endif %}">
+                                <div class="flexContianer w-100 d-flex align-items-baseline   ">
+                                    <div class="">
+                                        {% if user.profile.profile_picture %}
+                                            <img src="{{ user.profile.profile_picture.url }}" alt="Sender Profile Picture">
+                                            {% else %}
+                                            <img src="{% static 'images/no-image.jpg' %}" alt="No image">
+                                        {% endif %}
+                                    </div>
+                                    <div class="ms-auto me-auto ">
+                                        <p class="userUsername">{{ user.username }}</p>
                                     </div>
                                 </div>
                             </div>
