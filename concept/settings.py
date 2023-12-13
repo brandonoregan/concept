@@ -11,7 +11,13 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
 import os
+
+
+# Load the .env file
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,15 +27,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-06)^dbpo_(+(xhoe%@km%(rs7o2g(yz@&3b0s&ce0q@06rc3q*"
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = [
-    "concept-env-v5.eba-jmnuwas7.eu-west-1.elasticbeanstalk.com",
+    os.environ.get('APP_HOST'),
     "127.0.0.1",
-    # os.getenv("APP_HOST")
+    # os.environ.get("APP_HOST")
 ]
 
 
@@ -169,8 +175,8 @@ LOGOUT_REDIRECT_URL = "welcome"  # Replace with the desired URL
 # Email password recovery
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-EMAIL_HOST_USER = "brandonscodestuff@gmail.com"
-EMAIL_HOST_PASSWORD = "oybh upge pvvv iwjf"  # TODO: store this in a env variable
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
