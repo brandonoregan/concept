@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="cardContainer">
-    <form class="" action="{% if post.id is not None %}{% url 'post_single' post_id=post.id %}{% else %}{% endif %}" method="GET">
+    <form class="" action="{% if post.slug is not None %}{% url 'post_single' slug=post.slug %}{% else %}{% endif %}" method="GET">
         <button type="submit" class="">
             <div class="card">
                 <div class="image-container">

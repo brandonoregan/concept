@@ -36,8 +36,8 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
 # TODO: Create a slug url when on specific post page
 @login_required
-def post_single(request, post_id):
-    post = Post.objects.get(pk=post_id)
+def post_single(request, slug):
+    post = Post.objects.get(slug=slug)
     comments = Comment.objects.filter(post=post)
 
     if request.method == "POST":
