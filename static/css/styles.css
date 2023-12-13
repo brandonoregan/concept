@@ -27,17 +27,12 @@ header {
     margin: 0;
     padding: 0;
     min-height: 56px;
-
 }
 
 .navbar {
+    padding: 5px 2rem;
     background-color: white;
 }
-
-.navbarContainer {
-    max-width: 1100px;
-}
-
 
 .navLogo {
     height: 3rem;
