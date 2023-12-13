@@ -4,7 +4,7 @@
     box-shadow: 5px 2px 5px 2px;
     margin: 1.5rem 3rem; */
     background-color: var(--primary-blue);
-    min-height: calc(100vh - 4rem);
+    min-height: calc(100vh - 146px);
 }
 
 .loginForm {

@@ -22,7 +22,6 @@ def profile(request):
 
     if Post.objects.filter(author=request.user).exists():
         user_posts = Post.objects.filter(author=request.user)
-        print(user_posts)
     else:
         user_posts = None
 

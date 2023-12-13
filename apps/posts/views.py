@@ -1,7 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic.edit import CreateView
-from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .models import Post
+from .forms import PostForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -13,8 +13,6 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def post_home(request):
     recent_posts = Post.objects.order_by("-date")[0:5]
-    for post in recent_posts:
-        print(post.id)
 
     return render(
         request, "posts/post_home.html", context={"recent_posts": recent_posts}
@@ -34,29 +32,13 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-# TODO: Create a slug url when on specific post page
+
 @login_required
 def post_single(request, slug):
     post = Post.objects.get(slug=slug)
-    comments = Comment.objects.filter(post=post)
 
-    if request.method == "POST":
-        comment_form = CommentForm(request.POST)  # TODO add comment form
-        if comment_form.is_valid():
-            new_comment = comment_form.save(commit=False)
-            new_comment.post = post
-            new_comment.author = request.user
-            new_comment.save()
-            return redirect("post_page", post_id=post_id)
-    else:
-        comment_form = CommentForm()  # TODO add comment form
-
-    return render(
-        request,
-        "posts/post_single.html",
+    return render(request, "posts/post_single.html",
         {
             "post": post,
-            "comments": comments,
-            "comment_form": comment_form,
         },
     )

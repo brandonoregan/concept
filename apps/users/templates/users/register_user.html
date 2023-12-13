@@ -16,13 +16,13 @@
 {% block content %}
         <div class="container-fluid ">
             <div class="row registerContainer">
-                <div class="col col-md-6 leftCol d-flex align-items-center justify-content-center">
+                <div class="col-6 leftCol d-flex align-items-center justify-content-center">
                     <div class="registerImageContainer d-flex align-items-center position-relative ">
                         <img src="{% static 'images/welcome_brain.png' %}" alt="">
                         <!-- <h1 class="overlay-text">CONCEPT</h1> -->
                     </div>
                 </div>
-                <div class="col col-md-6 rightCol mt-2 ">
+                <div class="col-6 rightCol mt-2 ">
                     <form action="{% url 'register_user' %}" method="post" class="registerForm">
                         {% csrf_token %}
                         <h3 class="loginTitle mb-2 text-center ">Join the fun!</h3>
