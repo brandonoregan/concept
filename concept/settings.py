@@ -27,8 +27,8 @@ SECRET_KEY = "django-insecure-06)^dbpo_(+(xhoe%@km%(rs7o2g(yz@&3b0s&ce0q@06rc3q*
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'concept-env-v5.eba-jmnuwas7.eu-west-1.elasticbeanstalk.com',
-    '127.0.0.1',
+    "concept-env-v5.eba-jmnuwas7.eu-west-1.elasticbeanstalk.com",
+    "127.0.0.1",
     # os.getenv("APP_HOST")
 ]
 
@@ -170,9 +170,7 @@ LOGOUT_REDIRECT_URL = "welcome"  # Replace with the desired URL
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = "brandonscodestuff@gmail.com"
-EMAIL_HOST_PASSWORD = "oybh upge pvvv iwjf"  #TODO: store this in a env variable
+EMAIL_HOST_PASSWORD = "oybh upge pvvv iwjf"  # TODO: store this in a env variable
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-
-

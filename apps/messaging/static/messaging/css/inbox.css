@@ -29,7 +29,6 @@
     border: 1px solid black;
     border-radius: 5px;
     margin-top: 3px;
-    background-color: lightgrey;
 }
 
 .userUsername {
@@ -39,6 +38,10 @@
 
 .unreadMessage {
     background-color: white;
+}
+
+.readMessage {
+    background-color: lightgrey;
 }
 
 .rowScrollContainer {

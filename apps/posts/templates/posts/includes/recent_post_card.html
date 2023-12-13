@@ -1,7 +1,7 @@
 {% load static %}
 
-<form class="d-inline m-0 p-0 border-0 " action="{% url 'post_single' post_id=post.id %}" method="GET">
-    <button type="submit" class="card-btn">
+<form class="bg-transparent d-inline  m-0 p-0 border-0 " action="{% url 'post_single' post_id=post.id %}" method="GET">
+    <button type="submit" class="">
         <div class="card">
             <div class="image-container">
                 {% if post.post_image %}

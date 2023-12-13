@@ -54,11 +54,18 @@ def get_recent_messages(current_user, unique_participants):
 
         # Fetch the last message in the conversation if it exists
         last_message = conversation.last() if conversation.exists() else None
-        
+
         unordered_dict[participant] = last_message
-    
-    ordered_dict = OrderedDict(sorted(unordered_dict.items(), key=lambda x: x[1].sent_at if x[1] else None, reverse=True))
+
+    ordered_dict = OrderedDict(
+        sorted(
+            unordered_dict.items(),
+            key=lambda x: x[1].sent_at if x[1] else None,
+            reverse=True,
+        )
+    )
 
     return ordered_dict
+
 
 # Create a read-status model

@@ -55,12 +55,21 @@ header {
     font-weight: 600;
 }
 
-.nav-item a:hover {
-    font-weight: 600;
+.nav-item-text a:hover {
+    display: inline-block;
     transform: scale(1.4);
-    text-shadow: #1987ff;
 }
 
+.nav-item a svg:hover {
+    font-weight: 600;
+    transform: scale(1.4);
+    color: var(--primary-blue);
+}
+
+
+#navbarSupportedContent {
+    margin-left: 1rem;
+}
 /* Footer */
 /* Footer */
 

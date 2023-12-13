@@ -18,7 +18,7 @@ from .utils import (
     get_user_conversations,
     get_unique_participants,
     get_conversation_message_history,
-    get_recent_messages
+    get_recent_messages,
 )
 
 # TODO: Send message from admin on CustomUser/Profile creation
@@ -43,11 +43,8 @@ def inbox(request, user_username=None):
 
     # Get conversation messages between two users
     conversation = get_conversation_message_history(current_user, selected_user)
-    
-    
-    recent_messages = get_recent_messages(current_user, unique_participants)
 
-    
+    recent_messages = get_recent_messages(current_user, unique_participants)
 
     if request.method == "GET":
         # Get search query input data
@@ -78,7 +75,6 @@ def inbox(request, user_username=None):
         )
 
     if request.method == "POST":
-
         selected_username = request.POST.get("selected_username")
 
         if selected_username:
@@ -90,7 +86,7 @@ def inbox(request, user_username=None):
             last_message = conversation.last()
 
             if last_message and last_message.receiver == current_user:
-                last_message.read = True
+                last_message.receiver_read = True
                 last_message.save()
 
             return render(
@@ -148,10 +144,8 @@ def create_message(request):
         pass
 
 
-
-
 def unopened(request, message_id):
-    if request.method == 'POST':    
+    if request.method == "POST":
         # Get message object that is associciated with message_id
         message = get_object_or_404(Message, pk=message_id)
 
