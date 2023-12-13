@@ -6,11 +6,13 @@ from .models import Profile
 from apps.users.models import CustomUser
 from apps.posts.models import Post
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
 
+@login_required
 def profile(request):
     # Check if the logged in user has a profile picture available
     if request.user.profile.profile_picture:
@@ -35,6 +37,7 @@ def profile(request):
     )
 
 
+@login_required
 def edit_user(request):
     form = EditUserForm()
 
@@ -47,6 +50,7 @@ def edit_user(request):
     return render(request, "profiles/edit_user.html", context={"form": form})
 
 
+@login_required
 def edit_profile(request):
     # Need to update models in new form and replace the profile view so that it renders those updates after submission
     if request.method == "POST":

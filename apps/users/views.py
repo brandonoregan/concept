@@ -38,9 +38,7 @@ class LogoutUser(SuccessMessageMixin, LogoutView):
 class RegisterUser(SuccessMessageMixin, CreateView):
     template_name = "users/register_user.html"  # Designate the template to display view
     form_class = CreateUser  # From which form shouldd this view be created
-    success_message = (
-        "Your profile was created successfully"  # Following successful registration
-    )
+    success_message = "Your profile was created successfully. Please login to proceed."  # Following successful registration
     success_url = reverse_lazy("login_user")  # Redirected page or view trigger
     # authentication_form = CustomLoginForm
 

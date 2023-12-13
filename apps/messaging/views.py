@@ -1,19 +1,10 @@
-from typing import Any
-from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView
-from django.views.generic.list import ListView
 from .models import Message, Conversation
-from .forms import MessageForm
-from django.urls import reverse_lazy, reverse
-from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import get_object_or_404
-from django.db.models import Q, Max, OuterRef, Subquery
 from apps.users.models import CustomUser
-from collections import OrderedDict
-from django.utils import timezone
 from django.db import transaction
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 from .utils import (
     get_user_conversations,
     get_unique_participants,
@@ -21,12 +12,13 @@ from .utils import (
     get_recent_messages,
 )
 
-# TODO: Send message from admin on CustomUser/Profile creation
-
 # Create your views here.
 
 
+@login_required
 def inbox(request, user_username=None):
+    # user_username is used to store the variable of the client side search for recipient. The create_message view will return the user_username so we can open the conversation.
+
     # Currently logged on user
     current_user = request.user
 
@@ -36,15 +28,24 @@ def inbox(request, user_username=None):
     # Get a list of unique participants from each conversation excluding user
     unique_participants = get_unique_participants(conversations, request.user)
 
+    recent_messages = get_recent_messages(current_user, unique_participants)
+
+    # Return the most recent key-value pair in recent messages
+    first_message = next(iter(recent_messages.items()), None)
+
+    # Display this conversation on page refresh.
     if user_username is None:
-        selected_user = get_object_or_404(CustomUser, username="admin")
+        if first_message is None:
+            selected_user = get_object_or_404(CustomUser, username="admin")
+        else:
+            selected_user = get_object_or_404(
+                CustomUser, username=first_message[0].username
+            )
     else:
         selected_user = get_object_or_404(CustomUser, username=user_username)
 
     # Get conversation messages between two users
     conversation = get_conversation_message_history(current_user, selected_user)
-
-    recent_messages = get_recent_messages(current_user, unique_participants)
 
     if request.method == "GET":
         # Get search query input data
@@ -102,6 +103,7 @@ def inbox(request, user_username=None):
 
 
 @transaction.atomic
+@login_required
 def create_message(request):
     if request.method == "POST":
         # Get form data
@@ -142,21 +144,3 @@ def create_message(request):
     else:
         # Handle GET requests here if needed
         pass
-
-
-def unopened(request, message_id):
-    if request.method == "POST":
-        # Get message object that is associciated with message_id
-        message = get_object_or_404(Message, pk=message_id)
-
-        # Mark message as read if unread/False
-        if message.unopened == False:
-            message.unopened = True
-            message.save()
-
-        redirect_url = reverse("inbox")
-
-        if message_id:
-            redirect_url += f"?message_id={message_id}"
-
-        return HttpResponseRedirect(redirect_url)

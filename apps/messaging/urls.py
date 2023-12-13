@@ -5,5 +5,4 @@ urlpatterns = [
     path("inbox", views.inbox, name="inbox"),
     path("inbox/<str:user_username>/", views.inbox, name="inbox_with_user"),
     path("create_message", views.create_message, name="create_message"),
-    path("unopened/<int:message_id>/", views.unopened, name="unopened"),
 ]

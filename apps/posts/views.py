@@ -4,11 +4,13 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 
 
+@login_required
 def post_home(request):
     recent_posts = Post.objects.order_by("-date")[0:5]
     for post in recent_posts:
@@ -33,6 +35,7 @@ class PostCreate(LoginRequiredMixin, CreateView):
 
 
 # TODO: Create a slug url when on specific post page
+@login_required
 def post_single(request, post_id):
     post = Post.objects.get(pk=post_id)
     comments = Comment.objects.filter(post=post)
