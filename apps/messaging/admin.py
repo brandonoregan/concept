@@ -5,10 +5,11 @@ from apps.messaging.models import Conversation, Message
 class ConversationAdmin(admin.ModelAdmin):
     pass
 
+
 class MessageAdmin(admin.ModelAdmin):
     list_display = (
         "sender",
-        "receiver", 
+        "receiver",
         "sent_at",
     )
 

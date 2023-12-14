@@ -50,7 +50,6 @@ def edit_user(request):
 def edit_profile_picture(request):
     # Need to update models in new form and replace the profile view so that it renders those updates after submission
     if request.method == "POST":
-    
         pic_form = ProfilePicForm(
             request.POST, request.FILES, instance=request.user.profile
         )
@@ -73,9 +72,7 @@ def edit_profile_picture(request):
 
 @login_required
 def edit_profile_bio(request):
-
     if request.method == "POST":
-
         info_form = ProfileForm(request.POST, instance=request.user.profile)
 
         if info_form.is_valid():

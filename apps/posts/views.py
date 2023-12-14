@@ -32,12 +32,13 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-
 @login_required
 def post_single(request, slug):
     post = Post.objects.get(slug=slug)
 
-    return render(request, "posts/post_single.html",
+    return render(
+        request,
+        "posts/post_single.html",
         {
             "post": post,
         },

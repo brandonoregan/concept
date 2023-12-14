@@ -3,10 +3,7 @@ from apps.users.models import CustomUser
 
 
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = (
-        "username",
-        "is_superuser"
-    )
+    list_display = ("username", "is_superuser")
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

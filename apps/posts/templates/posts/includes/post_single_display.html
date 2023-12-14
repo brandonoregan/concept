@@ -21,22 +21,17 @@
 <!-- Author, Date, Contact Row -->
 <div class="row authorRow">
     <div class="col">
-        <div class="d-flex align-items-end ">
-        <!-- TODO: Add anonymous author options when creating a post -->
-        <!-- TODO: Save no profile pic svg to images then replace for author image below -->
-        {% if post.author == None %}
-        <p>Anonymous Author</p>
-        {% else %}
+        <div class="d-flex align-items-end gap-3 ">
             <div class="authorImageContainer">
                 <img src="{% if post.author.profile.profile_picture %}{{ post.author.profile.profile_picture.url }}{% else %}{% static 'images/person-circle.svg' %}{% endif %}" alt="Author profile picture">
             </div>
-                <p class="ms-3">Author: {{ post.author }}</p>
-                <a class="ms-auto me-auto" href="{% url 'inbox_with_user' user_username=post.author %}">
-                    <p >Contact Author <img src="{% static 'images/envelope.svg' %}" alt=""></p>
-                    
-                </a>
+            <p class="">Author: {% if post.author %}{{ post.author }}{% else %}Anonymous Author{% endif %}</p>
+            {% if post.author %}
+            <a class="ms-auto me-auto" href="{% url 'inbox_with_user' user_username=post.author %}">
+                <p >Contact Author <img src="{% static 'images/envelope.svg' %}" alt=""></p>
+            </a>
             {% endif %}
-            <p class=" ">
+            <p class="">
                 Posted: <time>{{ post.date|date:"d M Y" }}</time>
             </p>
         </div>

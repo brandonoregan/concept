@@ -16,4 +16,3 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ["title", "about", "content", "post_image"]
-

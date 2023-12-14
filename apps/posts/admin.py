@@ -2,6 +2,7 @@ from django.contrib import admin
 from apps.posts.models import Post
 from django.utils.text import slugify
 
+
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
 
@@ -14,5 +15,6 @@ class PostAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         obj.slug = slugify(obj.title)
         super().save_model(request, obj, form, change)
+
 
 admin.site.register(Post, PostAdmin)
