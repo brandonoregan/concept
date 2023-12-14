@@ -14,6 +14,7 @@ body {
   border: 2px solid black;
   box-shadow: 1px 1px 12px rgba(0, 0, 0, 0.4);
   padding: 1.5rem;
+  position: relative;
 }
 
 .imageContainer{
@@ -68,4 +69,25 @@ p {
 .authorRow {
   height: 5rem;
   margin: 1rem 0 0 0;
+}
+
+.editPostForm {
+  position: absolute;
+  top: .5rem;
+  right: 3rem;
+}
+
+.deleteButtonForm {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+}
+
+.modalTitle {
+  font-size: 4rem;
+}
+
+.modalText {
+  font-size: 1.2rem;
+  font-weight: 500;
 }

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy
@@ -32,6 +32,31 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+class PostUpdate(LoginRequiredMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = "posts/post_update.html"
+    success_url = reverse_lazy("post_home")
+    slug_field = "slug"
+    slug_url_kwarg = "slug"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        slug = self.kwargs.get("slug")
+        post = Post.objects.get(slug=slug)
+        context["post"] = post  # Add the post instance to the context
+        return context
+
+
+class PostDeleteView(DeleteView):
+    model = Post
+    success_url = reverse_lazy("post_home")
+
+    def get_object(self, queryset=None):
+        post_id = self.kwargs.get("pk")
+        return Post.objects.get(pk=post_id)
+
+
 @login_required
 def post_single(request, slug):
     post = Post.objects.get(slug=slug)
@@ -41,5 +66,6 @@ def post_single(request, slug):
         "posts/post_single.html",
         {
             "post": post,
+            "current_user": request.user,
         },
     )

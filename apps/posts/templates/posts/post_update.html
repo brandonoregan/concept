@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block title %}
+    Create Update
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid mainContainer">
+    <div class="row">
+        <div class="col">
+            <form enctype="multipart/form-data" action="{% url 'post_update' slug=post.slug %}" method="POST">
+                <h3>Update your post.</h3>
+                {% csrf_token %}
+                {% crispy form %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %} 
