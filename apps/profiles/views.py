@@ -1,9 +1,6 @@
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy, reverse
-from django.views.generic.edit import UpdateView
+from django.urls import reverse
 from .forms import ProfileForm, ProfilePicForm, EditUserForm
-from .models import Profile
-from apps.users.models import CustomUser
 from apps.posts.models import Post
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -50,33 +47,47 @@ def edit_user(request):
 
 
 @login_required
-def edit_profile(request):
+def edit_profile_picture(request):
     # Need to update models in new form and replace the profile view so that it renders those updates after submission
     if request.method == "POST":
-        if "pic_form" in request.POST:
-            pic_form = ProfilePicForm(
-                request.POST, request.FILES, instance=request.user.profile
+    
+        pic_form = ProfilePicForm(
+            request.POST, request.FILES, instance=request.user.profile
+        )
+
+        if pic_form.is_valid():
+            pic_form.save()
+            messages.success(
+                request, ("Your profile picture was successfully updated.")
             )
+        return redirect(reverse("profile"))
 
-            if pic_form.is_valid():
-                pic_form.save()
-                messages.success(
-                    request, ("Your profile picture was successfully updated.")
-                )
+    return render(
+        request,
+        "profiles/edit_profile_picture.html",
+        context={
+            "pic_form": ProfilePicForm(instance=request.user.profile),
+        },
+    )
 
-        elif "info_form" in request.POST:
-            info_form = ProfileForm(request.POST, instance=request.user.profile)
-            if info_form.is_valid():
-                info_form.save()
-                messages.success(request, ("Your bio was successfully updated."))
+
+@login_required
+def edit_profile_bio(request):
+
+    if request.method == "POST":
+
+        info_form = ProfileForm(request.POST, instance=request.user.profile)
+
+        if info_form.is_valid():
+            info_form.save()
+            messages.success(request, ("Your bio was successfully updated."))
 
         return redirect(reverse("profile"))
 
     return render(
         request,
-        "profiles/edit_profile.html",
+        "profiles/includes/edit_profile_bio.html",
         context={
             "info_form": ProfileForm(instance=request.user.profile),
-            "pic_form": ProfilePicForm(instance=request.user.profile),
         },
     )

@@ -29,6 +29,7 @@ body {
     z-index: 999;
     bottom: -1rem;
     right: -1rem;
+
 }
 
 .editSettingsForm {
@@ -36,6 +37,17 @@ body {
     z-index: 999;
     bottom: .5rem;
     left: .5rem;
+}
+
+.editBioForm {
+    position: absolute;
+    z-index: 999;
+    bottom: .5rem;
+    right: .6rem;
+}
+
+.editProfileForm:hover, .editBioForm:hover, .editSettingsForm:hover {
+    transform: scale(1.1);
 }
 
 .custom-file-upload {

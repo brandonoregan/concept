@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mainContainer">
+        <div class="row">
+            <div class="col">
+                <h3>Edit Profile Picture</h3>
+                <form action="{% url 'edit_profile_picture' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% crispy pic_form %}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
