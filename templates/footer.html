@@ -3,12 +3,17 @@
 <div class="container-fluid p-4  ">
     <div class="row">
         <div class="col">
-            <div class="justify-content-center d-flex align-items-baseline    ">
-                <div class="footerLogo">
-                    <img  src="{% static 'images/welcome_brain.png' %}" alt="Concept logo">
-                </div>
+            <div class="justify-content-center d-flex align-items-baseline">
+                <a href="{% if user.is_authenticated %}{% url 'post_home' %}{% else %}{% url 'welcome' %}{% endif %}">
+                    <div class="footerLogo">
+                        <img  src="{% static 'images/welcome_brain.png' %}" alt="Concept logo">
+                    </div>
+                </a>
                 <div class="d-flex justify-content-center ">
-                    <a class="footer-brand footerLogoText me-auto" href="{% url 'welcome' %}">CONCEPT</a>
+                    <a class="footer-brand footerLogoText me-auto" href="{% if user.is_authenticated %}     {% url 'post_home' %}
+                    {% else %}
+                        {% url 'welcome' %}
+                    {% endif %}">CONCEPT</a>
                     <p class="ms-3 ">Copyright &copy; 2023 Brandon O'Regan</p>
                 </div>
         </div>

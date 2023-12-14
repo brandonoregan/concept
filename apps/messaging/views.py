@@ -10,7 +10,9 @@ from .utils import (
     get_unique_participants,
     get_conversation_message_history,
     get_recent_messages,
+    format_last_login
 )
+from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -47,6 +49,8 @@ def inbox(request, user_username=None):
     # Get conversation messages between two users
     conversation = get_conversation_message_history(current_user, selected_user)
 
+    selected_user_last_login = format_last_login(selected_user.last_login)
+
     if request.method == "GET":
         # Get search query input data
         query = request.GET.get("q")
@@ -72,6 +76,7 @@ def inbox(request, user_username=None):
                 "selected_user": selected_user,
                 "conversation": conversation,
                 "recent_messages": recent_messages,
+                "selected_user_last_login": selected_user_last_login,
             },
         )
 
@@ -90,6 +95,8 @@ def inbox(request, user_username=None):
                 last_message.receiver_read = True
                 last_message.save()
 
+            selected_user_last_login = format_last_login(selected_user.last_login)
+
             return render(
                 request,
                 "messaging/inbox.html",
@@ -98,6 +105,7 @@ def inbox(request, user_username=None):
                     "selected_user": selected_user,
                     "conversation": conversation,
                     "recent_messages": recent_messages,
+                    "selected_user_last_login": selected_user_last_login,
                 },
             )
 

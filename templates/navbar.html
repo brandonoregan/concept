@@ -3,9 +3,9 @@
 <nav id="navbar" class="navbar navbar-expand-md bg-body-tertiary">
     <div class="container-fluid">
         <div class="navLogo">
-          <img  src="{% static 'images/welcome_brain.png' %}" alt="Concept logo">
+          <a href="{% if user.is_authenticated %}{% url 'post_home' %}{% else %}{% url 'welcome' %}{% endif %}"><img  src="{% static 'images/welcome_brain.png' %}" alt="Concept logo"></a>
         </div>
-        <a class="navbar-brand navbarLogoText me-auto" href="{% url 'welcome' %}">CONCEPT</a>
+        <a class="navbar-brand navbarLogoText me-auto" href="{% if user.is_authenticated %}{% url 'post_home' %}{% else %}{% url 'welcome' %}{% endif %}">CONCEPT</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="black" class="bi bi-list" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>

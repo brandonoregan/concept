@@ -85,10 +85,13 @@
 }
 
 .messageDisplayBannerRow h3 {
-    margin-left: .5rem;
     font-weight: 700;
     padding-bottom: 0;
     margin-bottom: 0;
+}
+
+.messageDisplayBannerRow p {
+    font-weight: 500;
 }
 
 /* message history */

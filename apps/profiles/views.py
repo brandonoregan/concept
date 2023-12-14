@@ -42,13 +42,17 @@ def edit_user(request):
 
         if edit_user_form.is_valid():
             edit_user_form.save()
+            messages.success(
+                request, ("Your account information was successfully updated.")
+            )
+        
+        return redirect(reverse("profile"))
 
     return render(request, "profiles/edit_user.html", context={"form": form})
 
 
 @login_required
 def edit_profile_picture(request):
-    # Need to update models in new form and replace the profile view so that it renders those updates after submission
     if request.method == "POST":
         pic_form = ProfilePicForm(
             request.POST, request.FILES, instance=request.user.profile

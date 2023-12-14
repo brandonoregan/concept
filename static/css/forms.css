@@ -8,7 +8,7 @@ body {
 
 .mainContainer {
     padding: 2rem 0 0 0;
-    min-height: calc(100vh - 144px);
+    min-height: calc(100vh - 140px);
 }
 
 .mainContainer form {
@@ -69,4 +69,8 @@ input:hover {
 
 .submitButton:hover {
     border: white;
+}
+
+.row {
+     --bs-gutter-x: 0;
 }

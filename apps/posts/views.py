@@ -4,6 +4,7 @@ from .models import Post
 from .forms import PostForm
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required
 
 
@@ -20,11 +21,12 @@ def post_home(request):
 
 
 # Class to create a post
-class PostCreate(LoginRequiredMixin, CreateView):
+class PostCreate(SuccessMessageMixin,LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = "posts/post_create.html"
     success_url = reverse_lazy("post_home")
+    success_message = "Your post has been successfully created."
 
     # Set the author to the logged-in user
     def form_valid(self, form):
@@ -32,13 +34,14 @@ class PostCreate(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class PostUpdate(LoginRequiredMixin, UpdateView):
+class PostUpdate(SuccessMessageMixin,LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = "posts/post_update.html"
     success_url = reverse_lazy("post_home")
     slug_field = "slug"
     slug_url_kwarg = "slug"
+    success_message = "Your post has been successfully updated."
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -48,9 +51,10 @@ class PostUpdate(LoginRequiredMixin, UpdateView):
         return context
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(SuccessMessageMixin, LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy("post_home")
+    success_message = "Your post has been successfully deleted."
 
     def get_object(self, queryset=None):
         post_id = self.kwargs.get("pk")

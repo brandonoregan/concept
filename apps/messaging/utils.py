@@ -2,6 +2,7 @@ from django.db.models import Max
 from .models import Conversation, Message
 from django.db.models import Q
 from collections import OrderedDict
+from datetime import datetime, timedelta
 
 
 def get_user_conversations(user):
@@ -45,7 +46,7 @@ def get_conversation_message_history(user1, user2):
 
 def get_recent_messages(current_user, unique_participants):
     """
-    Returns a dictionary of the unique users and the last message between the current_user ordered by last message sent
+    Returns a dictionary of the unique users and the last message between the current_user, ordered by last message sent
     """
     unordered_dict = {}
 
@@ -68,4 +69,23 @@ def get_recent_messages(current_user, unique_participants):
     return ordered_dict
 
 
-# Create a read-status model
+def format_last_login(last_login):
+    """
+    Format the last_login time
+    """
+    now = datetime.utcnow().replace(tzinfo=None)  # Get current time in UTC as naive datetime
+    last_login_naive = last_login.replace(tzinfo=None)  # Make last_login naive
+
+    time_diff = now - last_login_naive
+    hours = max(int(time_diff.total_seconds() / 3600), 1)  # Calculate hours
+
+    if time_diff.total_seconds() < 3600:  # Less than 1 hour
+        return f"1 hour ago"  # Default to 1 hour for less than 60 minutes
+    
+    elif 3600 <= time_diff.total_seconds() < 86400:  # Within 24 hours
+        return f"{hours} hour{'s' if hours > 1 else ''} ago"  # Show hours if greater than 1 hour
+    
+    else:
+        days = time_diff.days
+        return f"{days} day{'s' if days > 1 else ''} ago"
+

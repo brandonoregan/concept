@@ -1,7 +1,5 @@
 {% load static %}
 
-<!-- TODO: Add javascript so that the overflow-y scroll container start from the bottom instead of the top-->
-
 <!-- Banner Row -->
 <div class="row messageDisplayBannerRow">
     {% if selected_user %}
@@ -15,6 +13,8 @@
         </div>
         <div class="col">
             <h3>{{ selected_user }}</h3>
+            <p>Last login: {{ selected_user_last_login }}
+            </p>
         </div>
     {% endif %}
 </div>
