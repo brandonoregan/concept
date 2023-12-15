@@ -33,9 +33,8 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG")
 
 ALLOWED_HOSTS = [
-    os.environ.get("APP_HOST"),
+    "concept-env-v5.eba-jmnuwas7.eu-west-1.elasticbeanstalk.com",
     "127.0.0.1",
-    # os.environ.get("APP_HOST")
 ]
 
 
@@ -96,8 +95,12 @@ WSGI_APPLICATION = "concept.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": 'postgres',
+        'USER': os.environ.get("USER"),
+        'PASSWORD': os.environ.get("PASSWORD"),
+        'HOST':'concept-db.cpfatwfjoswc.eu-west-1.rds.amazonaws.com',
+        'PORT':'5432',
     }
 }
 
