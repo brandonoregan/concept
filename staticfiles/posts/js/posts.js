@@ -1,3 +1,9 @@
+// Popup Model
+
+
+// Card Carousel Copied Code
+// Card Carousel Copied Code
+
 const cardsContainer = document.querySelector(".card-carousel");
 const cardsController = document.querySelector(".card-carousel + .card-controller")
 

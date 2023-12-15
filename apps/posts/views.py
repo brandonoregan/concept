@@ -21,7 +21,7 @@ def post_home(request):
 
 
 # Class to create a post
-class PostCreate(SuccessMessageMixin,LoginRequiredMixin, CreateView):
+class PostCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = "posts/post_create.html"
@@ -34,7 +34,7 @@ class PostCreate(SuccessMessageMixin,LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class PostUpdate(SuccessMessageMixin,LoginRequiredMixin, UpdateView):
+class PostUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = "posts/post_update.html"

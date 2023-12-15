@@ -33,4 +33,3 @@ class Message(models.Model):
     # Provides a string representation of an object
     def __str__(self):
         return f"{self.sender} -> {self.receiver}: {self.text}"
-

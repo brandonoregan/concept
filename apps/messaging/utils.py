@@ -73,7 +73,9 @@ def format_last_login(last_login):
     """
     Format the last_login time
     """
-    now = datetime.utcnow().replace(tzinfo=None)  # Get current time in UTC as naive datetime
+    now = datetime.utcnow().replace(
+        tzinfo=None
+    )  # Get current time in UTC as naive datetime
     last_login_naive = last_login.replace(tzinfo=None)  # Make last_login naive
 
     time_diff = now - last_login_naive
@@ -81,11 +83,10 @@ def format_last_login(last_login):
 
     if time_diff.total_seconds() < 3600:  # Less than 1 hour
         return f"1 hour ago"  # Default to 1 hour for less than 60 minutes
-    
+
     elif 3600 <= time_diff.total_seconds() < 86400:  # Within 24 hours
         return f"{hours} hour{'s' if hours > 1 else ''} ago"  # Show hours if greater than 1 hour
-    
+
     else:
         days = time_diff.days
         return f"{days} day{'s' if days > 1 else ''} ago"
-

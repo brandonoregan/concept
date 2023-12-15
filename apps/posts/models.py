@@ -16,7 +16,6 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, max_length=150)
     post_image = models.ImageField(upload_to="post_images/", blank=True, null=True)
 
-
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
@@ -28,5 +27,3 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
-
-

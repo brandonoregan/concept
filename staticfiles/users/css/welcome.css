@@ -36,6 +36,7 @@ body {
     font-size: 1rem;
     letter-spacing: 7px;
     text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+    text-align: center;
 }
 
 .signupBtn {
@@ -103,6 +104,10 @@ body {
 /* Reviews Section */
 /* Reviews Section */
 
+.reviewsBanner {
+    height: 100%;
+}
+
 .post {
 display: flex;
 flex-direction: column;
@@ -112,6 +117,8 @@ text-decoration: none;
 color: black;
 transition: all 0.2s ease;
 padding: 2rem;
+min-width: 250px;
+max-width: 350;
 }
 
 .post:hover,
@@ -156,7 +163,6 @@ padding: 2rem;
 border-radius: 12px;
 width: 100%;
 margin: 4rem auto 2rem auto;
-
 }
 
 #latest-posts h2 {
@@ -168,6 +174,7 @@ list-style: none;
 margin: 0;
 padding: 0;
 display: flex;
+flex-wrap: wrap;
 gap: 2rem;
 }
 
@@ -184,3 +191,41 @@ font-weight: 900;
 text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
+/* Media queries */
+/* Media queries */
+
+
+  
+
+/* Small devices (landscape phones) */
+@media (min-width: 576px) {
+    /* Your CSS for small to medium screens */
+  }
+  
+
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+    .overlay-text {
+        font-size: 5rem;
+    } 
+  }
+  
+/* Extra small devices (phones) */
+@media (max-width: 500px) {
+    /* Your CSS for smaller screens */
+    .overlay-text {
+        font-size: 3rem;
+    }
+  }
+
+/* Large devices (desktops) */
+@media (min-width: 992px) {
+    /* Your CSS for large screens */
+  }
+  
+
+/* Extra large devices (large desktops) */
+@media (min-width: 1200px) {
+    /* Your CSS for extra large screens */
+  }
+  

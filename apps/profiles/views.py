@@ -45,7 +45,7 @@ def edit_user(request):
             messages.success(
                 request, ("Your account information was successfully updated.")
             )
-        
+
         return redirect(reverse("profile"))
 
     return render(request, "profiles/edit_user.html", context={"form": form})

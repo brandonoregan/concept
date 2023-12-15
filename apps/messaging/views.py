@@ -10,7 +10,7 @@ from .utils import (
     get_unique_participants,
     get_conversation_message_history,
     get_recent_messages,
-    format_last_login
+    format_last_login,
 )
 from datetime import datetime, timedelta
 

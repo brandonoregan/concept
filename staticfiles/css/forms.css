@@ -8,6 +8,11 @@ body {
 
 .mainContainer {
     padding: 2rem 0 0 0;
+    min-height: calc(100vh - 140px);
+}
+
+.mainContainer form {
+    padding: 1rem;
 }
 
 .mainContainer .row {
@@ -17,7 +22,7 @@ body {
 }   
 
 .mainContainer .col {
-    min-width: 350px;
+    min-width: 330px;
     max-width: 35rem;
 }
 
@@ -28,6 +33,16 @@ body {
     font-size: 2.5rem;
     letter-spacing: 3px;
     text-shadow: 0 2px 15px rgba(0,0,0,0.5);
+}
+
+.checkInbox {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.checkInbox {
+    font-size: 1.5rem;
+    text-align: center;
 }
 
 input:hover {
@@ -54,4 +69,8 @@ input:hover {
 
 .submitButton:hover {
     border: white;
+}
+
+.row {
+     --bs-gutter-x: 0;
 }

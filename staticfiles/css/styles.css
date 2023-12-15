@@ -16,6 +16,9 @@
 
 body {
     background-color: var(--primary-blue);
+    position: relative;
+    padding-bottom: 100px;
+
 }
 /* Navbar */
 /* Navbar */
@@ -23,10 +26,11 @@ body {
 header {
     margin: 0;
     padding: 0;
-
+    min-height: 56px;
 }
 
 .navbar {
+    padding: 5px 2rem;
     background-color: white;
 }
 
@@ -46,15 +50,49 @@ header {
     font-weight: 900;
 }
 
+.nav-item a {
+    font-weight: 600;
+}
+
+.nav-item-text a:hover {
+    display: inline-block;
+    transform: scale(1.4);
+}
+
+.nav-item a svg:hover {
+    font-weight: 600;
+    transform: scale(1.4);
+    color: var(--primary-blue);
+}
+
+
+#navbarSupportedContent {
+    margin-left: 1rem;
+}
 /* Footer */
 /* Footer */
 
 footer {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: var(--secondary-fade);
+    min-height: 100px;
 }
 
+.footerLogo {
+    height: 3rem;
+    width: 3rem;
+    margin-right: 3px;
+}
 
+.footerLogo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
+}
 
+.footerLogoText {
+    font-weight: 900;
+    text-decoration: none;
+    color: black;
+}
