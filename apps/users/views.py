@@ -66,7 +66,7 @@ class RegisterUser(SuccessMessageMixin, CreateView):
             conversation = Conversation.objects.create()
             conversation.participants.add(user, admin)
 
-        welcome_text = "Welcome to your inbox! Use the search bar to find people to connect with, or even chat to me!"
+        welcome_text = "Welcome to your inbox! Use the search bar to find people to connect with, or even chat to me! I might reply...eventually."
 
         # Create a welcome message from admin to the newly registered user
         message = Message.objects.create(

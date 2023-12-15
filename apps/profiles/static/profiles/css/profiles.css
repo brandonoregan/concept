@@ -2,6 +2,16 @@ body {
     background-color: var(--primary-blue);
 }
 
+.mainContainer {
+    min-height: calc(100vh - 140px);
+}
+
+.rowContainer {
+    display: flex;
+    justify-content: center;
+}
+
+
 .navbar {
     background-color: white;
 }
@@ -13,7 +23,7 @@ body {
     border-radius: 1rem;
 }
 
-.profileCardContainer{
+.profileCardContainer {
     transform: scale(1.1);
 }
 
@@ -68,10 +78,6 @@ body {
     margin-top: 2rem;
 }
 
-.rowContainer {
-    display: flex;
-    justify-content: center;
-}
 
 .cardContainer {
     max-width: 280px;
