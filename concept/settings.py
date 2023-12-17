@@ -164,9 +164,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
-AUTH_USER_MODEL = (
-    "users.CustomUser"  # New user model for project, consequence of CustomUser model
-)
+AUTH_USER_MODEL = "users.CustomUser"  # New user model for project, consequence of CustomUser model
 
 LOGIN_URL = "login_user"  # Successful login redirection needs to be changed or else is will automatically redirect to accounts/login/
 

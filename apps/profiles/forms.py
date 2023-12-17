@@ -41,7 +41,9 @@ class ProfilePicForm(forms.ModelForm):
         self.helper.form_class = "profile_pic_button"
         self.helper.form_method = "post"
         self.helper.form_action = reverse_lazy("edit_profile_picture")
-        self.helper.add_input(Submit("pic_form", "Upload", css_class="submitButton"))
+        self.helper.add_input(
+            Submit("pic_form", "Upload", css_class="submitButton")
+        )
 
     class Meta:
         model = Profile
@@ -61,4 +63,6 @@ class EditUserForm(forms.ModelForm):
         self.helper.form_method = "post"
         self.helper.form_action = "edit_user"
 
-        self.helper.add_input(Submit("submit", "Submit", css_class="submitButton"))
+        self.helper.add_input(
+            Submit("submit", "Submit", css_class="submitButton")
+        )

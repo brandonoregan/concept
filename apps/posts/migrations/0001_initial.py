@@ -46,14 +46,18 @@ class Migration(migrations.Migration):
                 (
                     "content",
                     models.TextField(
-                        validators=[django.core.validators.MinLengthValidator(10)]
+                        validators=[
+                            django.core.validators.MinLengthValidator(10)
+                        ]
                     ),
                 ),
                 ("date", models.DateField(auto_now=True)),
                 ("slug", models.SlugField(max_length=150, unique=True)),
                 (
                     "post_image",
-                    models.ImageField(blank=True, null=True, upload_to="post_images/"),
+                    models.ImageField(
+                        blank=True, null=True, upload_to="post_images/"
+                    ),
                 ),
                 ("likes", models.IntegerField(default=0)),
                 (

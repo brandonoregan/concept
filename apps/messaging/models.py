@@ -5,11 +5,15 @@ from apps.users.models import CustomUser
 
 
 class Conversation(models.Model):
-    participants = models.ManyToManyField(CustomUser, related_name="conversations")
+    participants = models.ManyToManyField(
+        CustomUser, related_name="conversations"
+    )
     last_message = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return ", ".join(str(participant) for participant in self.participants.all())
+        return ", ".join(
+            str(participant) for participant in self.participants.all()
+        )
 
 
 class Message(models.Model):

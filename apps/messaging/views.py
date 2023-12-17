@@ -46,7 +46,9 @@ def inbox(request, user_username=None):
         selected_user = get_object_or_404(CustomUser, username=user_username)
 
     # Get conversation messages between two users
-    conversation = get_conversation_message_history(current_user, selected_user)
+    conversation = get_conversation_message_history(
+        current_user, selected_user
+    )
 
     selected_user_last_login = format_last_login(selected_user.last_login)
 
@@ -85,10 +87,14 @@ def inbox(request, user_username=None):
         selected_username = request.POST.get("selected_username")
 
         if selected_username:
-            selected_user = get_object_or_404(CustomUser, username=selected_username)
+            selected_user = get_object_or_404(
+                CustomUser, username=selected_username
+            )
 
             # Get conversation messages between two users
-            conversation = get_conversation_message_history(current_user, selected_user)
+            conversation = get_conversation_message_history(
+                current_user, selected_user
+            )
 
             last_message = conversation.last()
 
@@ -96,7 +102,9 @@ def inbox(request, user_username=None):
                 last_message.receiver_read = True
                 last_message.save()
 
-            selected_user_last_login = format_last_login(selected_user.last_login)
+            selected_user_last_login = format_last_login(
+                selected_user.last_login
+            )
 
             return render(
                 request,
@@ -148,7 +156,9 @@ def create_message(request):
         conversation.save()
 
         return redirect(
-            reverse("inbox_with_user", kwargs={"user_username": receiver_username})
+            reverse(
+                "inbox_with_user", kwargs={"user_username": receiver_username}
+            )
         )
     else:
         # Handle GET requests here if needed

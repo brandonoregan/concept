@@ -53,7 +53,9 @@ def get_recent_messages(current_user, unique_participants):
     unordered_dict = {}
 
     for participant in unique_participants:
-        conversation = get_conversation_message_history(current_user, participant)
+        conversation = get_conversation_message_history(
+            current_user, participant
+        )
 
         # Fetch the last message in the conversation if it exists
         last_message = conversation.last() if conversation.exists() else None

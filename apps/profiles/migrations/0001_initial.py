@@ -28,7 +28,9 @@ class Migration(migrations.Migration):
                 ("bio", models.TextField(blank=True, null=True)),
                 (
                     "profile_picture",
-                    models.ImageField(blank=True, null=True, upload_to="profile_pics/"),
+                    models.ImageField(
+                        blank=True, null=True, upload_to="profile_pics/"
+                    ),
                 ),
                 (
                     "user",

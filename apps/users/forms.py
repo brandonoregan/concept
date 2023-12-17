@@ -12,7 +12,9 @@ class CreateUser(UserCreationForm):
         self.helper.form_class = "registerForm"
         self.helper.form_method = "post"
         self.helper.form_action = "register_user"
-        self.helper.add_input(Submit("submit", "Submit", css_class="registerButton"))
+        self.helper.add_input(
+            Submit("submit", "Submit", css_class="registerButton")
+        )
 
     class Meta:
         model = CustomUser

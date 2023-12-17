@@ -11,7 +11,9 @@ class PostForm(forms.ModelForm):
         self.helper.form_method = "post"
         self.helper.form_action = "post_create"
 
-        self.helper.add_input(Submit("submit", "Submit", css_class="submitButton"))
+        self.helper.add_input(
+            Submit("submit", "Submit", css_class="submitButton")
+        )
 
     class Meta:
         model = Post

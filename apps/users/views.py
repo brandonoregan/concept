@@ -35,7 +35,9 @@ class LogoutUser(SuccessMessageMixin, LogoutView):
 
 
 class RegisterUser(SuccessMessageMixin, CreateView):
-    template_name = "users/register_user.html"  # Designate the template to display view
+    template_name = (
+        "users/register_user.html"  # Designate the template to display view
+    )
     form_class = CreateUser
     success_message = (
         "Your profile was created successfully. " "Please login to proceed."

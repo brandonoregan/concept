@@ -8,13 +8,17 @@ from django.utils.text import slugify
 
 
 class Post(models.Model):
-    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(
+        CustomUser, on_delete=models.SET_NULL, null=True
+    )
     title = models.CharField(max_length=150)
     about = models.CharField(max_length=300, default="...")
     content = models.TextField(validators=[MinLengthValidator(10)])
     date = models.DateField(auto_now=True)
     slug = models.SlugField(unique=True, max_length=150)
-    post_image = models.ImageField(upload_to="post_images/", blank=True, null=True)
+    post_image = models.ImageField(
+        upload_to="post_images/", blank=True, null=True
+    )
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -23,7 +27,9 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(
+        CustomUser, on_delete=models.SET_NULL, null=True
+    )
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
