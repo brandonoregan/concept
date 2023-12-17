@@ -5,7 +5,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
     dependencies = [
-        ("messaging", "0005_remove_message_unopened_message_receiver_read_and_more"),
+        (
+            "messaging",
+            "0005_remove_message_unopened_message_receiver_read_and_more",
+        ),
     ]
 
     operations = [

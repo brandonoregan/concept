@@ -2,7 +2,7 @@ from django.db.models import Max
 from .models import Conversation, Message
 from django.db.models import Q
 from collections import OrderedDict
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 def get_user_conversations(user):
@@ -18,7 +18,8 @@ def get_user_conversations(user):
 
 def get_unique_participants(conversations, user):
     """
-    Returns a list of unique  participants from each conversation excluding user
+    Returns a list of unique  participants from each conversation
+    excluding user
     """
     # List for all other participants in each conversation
     other_participants_list = []
@@ -46,7 +47,8 @@ def get_conversation_message_history(user1, user2):
 
 def get_recent_messages(current_user, unique_participants):
     """
-    Returns a dictionary of the unique users and the last message between the current_user, ordered by last message sent
+    Returns a dictionary of the unique users and the last message
+    between the current_user, ordered by last message sent
     """
     unordered_dict = {}
 
@@ -82,10 +84,10 @@ def format_last_login(last_login):
     hours = max(int(time_diff.total_seconds() / 3600), 1)  # Calculate hours
 
     if time_diff.total_seconds() < 3600:  # Less than 1 hour
-        return f"1 hour ago"  # Default to 1 hour for less than 60 minutes
+        return "1 hour ago"  # Default to 1 hour for less than 60 minutes
 
-    elif 3600 <= time_diff.total_seconds() < 86400:  # Within 24 hours
-        return f"{hours} hour{'s' if hours > 1 else ''} ago"  # Show hours if greater than 1 hour
+    elif 3600 <= time_diff.total_seconds() < 86400:
+        return f"{hours} hour{'s' if hours > 1 else ''} ago"
 
     else:
         days = time_diff.days

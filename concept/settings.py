@@ -96,11 +96,11 @@ WSGI_APPLICATION = "concept.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": 'postgres',
-        'USER': os.environ.get("USER"),
-        'PASSWORD': os.environ.get("PASSWORD"),
-        'HOST':'concept-db.cpfatwfjoswc.eu-west-1.rds.amazonaws.com',
-        'PORT':'5432',
+        "NAME": "postgres",
+        "USER": os.environ.get("USER"),
+        "PASSWORD": os.environ.get("PASSWORD"),
+        "HOST": "concept-db.cpfatwfjoswc.eu-west-1.rds.amazonaws.com",
+        "PORT": "5432",
     }
 }
 

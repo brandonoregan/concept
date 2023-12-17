@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.shortcuts import render
 from .forms import CreateUser
 from django.views.generic.edit import CreateView
 from django.contrib.messages.views import SuccessMessageMixin
@@ -37,10 +36,11 @@ class LogoutUser(SuccessMessageMixin, LogoutView):
 
 class RegisterUser(SuccessMessageMixin, CreateView):
     template_name = "users/register_user.html"  # Designate the template to display view
-    form_class = CreateUser  # From which form shouldd this view be created
-    success_message = "Your profile was created successfully. Please login to proceed."  # Following successful registration
-    success_url = reverse_lazy("login_user")  # Redirected page or view trigger
-    # authentication_form = CustomLoginForm
+    form_class = CreateUser
+    success_message = (
+        "Your profile was created successfully. " "Please login to proceed."
+    )
+    success_url = reverse_lazy("login_user")
 
     # Login registered user on correct form validation
     def form_valid(self, form):
@@ -66,11 +66,18 @@ class RegisterUser(SuccessMessageMixin, CreateView):
             conversation = Conversation.objects.create()
             conversation.participants.add(user, admin)
 
-        welcome_text = "Welcome to your inbox! Use the search bar to find people to connect with, or even chat to me! I might reply...eventually."
+        welcome_text = (
+            "Welcome to your inbox! Use the search bar to find people to connect with, "
+            "or even chat to me! "
+            "I might reply...eventually."
+        )
 
         # Create a welcome message from admin to the newly registered user
         message = Message.objects.create(
-            sender=admin, receiver=user, text=welcome_text, conversation=conversation
+            sender=admin,
+            receiver=user,
+            text=welcome_text,
+            conversation=conversation,
         )
 
         # Update the last_message timestamp of the conversation
