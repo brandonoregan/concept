@@ -35,7 +35,6 @@ def profile(request):
 
 @login_required
 def edit_user(request):
-    form = EditUserForm()
 
     if request.method == "POST":
         edit_user_form = EditUserForm(request.POST, instance=request.user)
@@ -47,8 +46,11 @@ def edit_user(request):
             )
 
         return redirect(reverse("profile"))
+    
+    else:
+        form = EditUserForm(instance=request.user)
 
-    return render(request, "profiles/edit_user.html", context={"form": form})
+        return render(request, "profiles/edit_user.html", context={"form": form})
 
 
 @login_required
