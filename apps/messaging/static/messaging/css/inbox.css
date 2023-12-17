@@ -182,6 +182,24 @@
     outline: none;
 }
 
+.backButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font: inherit; 
+    font-weight: 600;
+    margin-right: .5rem;
+}
+
+.backButton:hover {
+    transform: scale(1.1);
+}
+
+.searchTitle {
+    color: grey;
+}
+
 /* Scroll bar styles for the specific element with class .custom-scrollbar */
 
 /* Width of the scrollbar */

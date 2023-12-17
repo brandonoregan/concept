@@ -51,9 +51,7 @@
         <div class="imageContainer">
             <img src="{% if post.post_image %}{{ post.post_image.url }}{% else %}{% static 'images/welcome_brain.png' %}{% endif %}" alt="Post supporting image">
         </div>
-        <p>
-            {{ post.content }}
-        </p>
+        {{ post.content|linebreaks }}
     </div>
 </div>
 <!-- Author, Date, Contact Row -->
