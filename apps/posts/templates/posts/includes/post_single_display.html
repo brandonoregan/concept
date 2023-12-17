@@ -64,7 +64,7 @@
                 <img src="{% if post.author.profile.profile_picture %}{{ post.author.profile.profile_picture.url }}{% else %}{% static 'images/person-circle.svg' %}{% endif %}" alt="Author profile picture">
             </div>
             <p class="">Author: {% if post.author %}{{ post.author }}{% else %}Anonymous Author{% endif %}</p>
-            {% if post.author %}
+            {% if post.author and not post.author == current_user %}
             <a class="ms-auto me-auto" href="{% url 'inbox_with_user' user_username=post.author %}">
                 <p >Contact Author <img src="{% static 'images/envelope.svg' %}" alt=""></p>
             </a>

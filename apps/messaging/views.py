@@ -12,7 +12,6 @@ from .utils import (
     get_recent_messages,
     format_last_login,
 )
-from datetime import datetime, timedelta
 
 # Create your views here.
 
@@ -55,7 +54,7 @@ def inbox(request, user_username=None):
         # Get search query input data
         query = request.GET.get("q")
         if query:
-            matched_users = CustomUser.objects.filter(username__icontains=query)
+            matched_users = CustomUser.objects.filter(username__icontains=query).exclude(id=current_user.id)
         else:
             matched_users = None
 
