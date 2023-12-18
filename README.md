@@ -4,6 +4,7 @@ A blogging platform that allows users to learn and connect.
 ## Description
 Concept is a social application that encourages users to create blog post on the concept of the material they are learning. Concept also facilitates user messaging, encouraging feedback for greater learning potential.
 
+## Preview
 ![post-concept](https://github.com/brandonoregan/concept/assets/100802480/abb6434b-c1ae-41c0-8e0b-7cec368fec76)
 
 ![inbox](https://github.com/brandonoregan/concept/assets/100802480/b551662d-5071-433e-8145-a9531f54d523)
