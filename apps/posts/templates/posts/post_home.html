@@ -22,9 +22,12 @@
             </div>
         </div>
         <div class="row d-flex justify-content-center mt-3 ">
-            <div class="col carouselCol">
-                <div class="carouselContainer">
+            <div class="col carouselCol position-relative ">
+                <div class="carouselContainer ">
                     <div class="blueBlock">
+                    </div>
+                    <div class="swipeIcon">
+                        <img src="{% static 'images/swipe-right-icon.svg' %}" alt="">
                     </div>
                     <div class="card-carousel">
                         {% for post in recent_posts %}

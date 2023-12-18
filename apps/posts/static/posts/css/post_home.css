@@ -48,6 +48,22 @@ opacity: 0;
     z-index: 999;
 }
 
+.swipeIcon {
+    position: absolute;
+    z-index: 999;
+    top: 50%;
+    left: 15%;
+    color: black;
+    height: 4rem;
+    width: 4rem;
+}
+
+.swipeIcon img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
+
 .carouselContainer {
     overflow: hidden;
     padding: 20px;
@@ -154,3 +170,13 @@ opacity: 0;
     margin-top: 1rem;
     /* color: var(--primary-blue) */
 }
+
+
+
+@media (max-width: 780px) {
+    
+    .swipeIcon {
+        display: none;
+    }
+
+  }
