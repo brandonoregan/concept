@@ -2,9 +2,6 @@ from django.db import models
 from apps.users.models import CustomUser
 
 
-# Create your models here.
-
-
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     short_bio = models.CharField(max_length=100, blank=True, null=True)

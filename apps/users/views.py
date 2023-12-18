@@ -10,10 +10,7 @@ from apps.profiles.models import Profile
 from apps.messaging.models import Message, Conversation
 from .models import CustomUser
 
-# Create your views here.
 
-
-# View for initial website page
 def welcome(request):
     return render(request, "users/welcome.html")
 
@@ -29,14 +26,13 @@ class LogoutUser(SuccessMessageMixin, LogoutView):
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        # Add a success message
         messages.success(self.request, ("You were successfully logged out."))
         return response
 
 
 class RegisterUser(SuccessMessageMixin, CreateView):
     template_name = (
-        "users/register_user.html"  # Designate the template to display view
+        "users/register_user.html"
     )
     form_class = CreateUser
     success_message = (
@@ -64,6 +60,7 @@ class RegisterUser(SuccessMessageMixin, CreateView):
             .filter(participants=admin)
             .first()
         )
+        
         if not conversation:
             conversation = Conversation.objects.create()
             conversation.participants.add(user, admin)

@@ -20,7 +20,6 @@ def post_home(request):
     )
 
 
-# Class to create a post
 class PostCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
@@ -47,7 +46,7 @@ class PostUpdate(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
         slug = self.kwargs.get("slug")
         post = Post.objects.get(slug=slug)
-        context["post"] = post  # Add the post instance to the context
+        context["post"] = post
         return context
 
 

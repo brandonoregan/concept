@@ -1,8 +1,6 @@
 from django.db import models
 from apps.users.models import CustomUser
 
-# Create your models here.
-
 
 class Conversation(models.Model):
     participants = models.ManyToManyField(

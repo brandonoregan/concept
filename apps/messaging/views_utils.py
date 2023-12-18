@@ -21,16 +21,14 @@ def get_unique_participants(conversations, user):
     Returns a list of unique  participants from each conversation
     excluding user
     """
-    # List for all other participants in each conversation
+
     other_participants_list = []
 
     for conversation in conversations:
-        # Exclude the current_user to get the other participant(s)
         other_participant = conversation.participants.exclude(id=user.id)
-        # Add the other participant(s) to the list
+
         other_participants_list.extend(other_participant)
 
-    # Remove duplicates from the list, keeping unique participants
     unique_participants = list(set(other_participants_list))
 
     return unique_participants
@@ -77,16 +75,14 @@ def format_last_login(last_login):
     """
     Format the last_login time
     """
-    now = datetime.utcnow().replace(
-        tzinfo=None
-    )  # Get current time in UTC as naive datetime
-    last_login_naive = last_login.replace(tzinfo=None)  # Make last_login naive
+    now = datetime.utcnow().replace(tzinfo=None)
+    last_login_naive = last_login.replace(tzinfo=None)
 
     time_diff = now - last_login_naive
-    hours = max(int(time_diff.total_seconds() / 3600), 1)  # Calculate hours
+    hours = max(int(time_diff.total_seconds() / 3600), 1)
 
-    if time_diff.total_seconds() < 3600:  # Less than 1 hour
-        return "1 hour ago"  # Default to 1 hour for less than 60 minutes
+    if time_diff.total_seconds() < 3600:
+        return "1 hour ago"
 
     elif 3600 <= time_diff.total_seconds() < 86400:
         return f"{hours} hour{'s' if hours > 1 else ''} ago"

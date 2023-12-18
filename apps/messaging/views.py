@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from apps.users.models import CustomUser
 from django.db import transaction
 from django.contrib.auth.decorators import login_required
-from .utils import (
+from .views_utils import (
     get_user_conversations,
     get_unique_participants,
     get_conversation_message_history,
@@ -13,25 +13,17 @@ from .utils import (
     format_last_login,
 )
 
-# Create your views here.
-
 
 @login_required
 def inbox(request, user_username=None):
-    # user_username is used to store the variable of the client side search for recipient. The create_message view will return the user_username so we can open the conversation.
-
-    # Currently logged on user
     current_user = request.user
 
-    # Get all user converstions in most recent order
     conversations = get_user_conversations(request.user)
 
-    # Get a list of unique participants from each conversation excluding user
     unique_participants = get_unique_participants(conversations, request.user)
 
     recent_messages = get_recent_messages(current_user, unique_participants)
 
-    # Return the most recent key-value pair in recent messages
     first_message = next(iter(recent_messages.items()), None)
 
     # Display this conversation on page refresh.
@@ -45,7 +37,6 @@ def inbox(request, user_username=None):
     else:
         selected_user = get_object_or_404(CustomUser, username=user_username)
 
-    # Get conversation messages between two users
     conversation = get_conversation_message_history(
         current_user, selected_user
     )
@@ -53,8 +44,9 @@ def inbox(request, user_username=None):
     selected_user_last_login = format_last_login(selected_user.last_login)
 
     if request.method == "GET":
-        # Get search query input data
+
         query = request.GET.get("q")
+
         if query:
             matched_users = CustomUser.objects.filter(
                 username__icontains=query
@@ -84,6 +76,7 @@ def inbox(request, user_username=None):
         )
 
     if request.method == "POST":
+
         selected_username = request.POST.get("selected_username")
 
         if selected_username:
@@ -91,7 +84,6 @@ def inbox(request, user_username=None):
                 CustomUser, username=selected_username
             )
 
-            # Get conversation messages between two users
             conversation = get_conversation_message_history(
                 current_user, selected_user
             )
@@ -160,6 +152,3 @@ def create_message(request):
                 "inbox_with_user", kwargs={"user_username": receiver_username}
             )
         )
-    else:
-        # Handle GET requests here if needed
-        pass

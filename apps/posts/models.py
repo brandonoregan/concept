@@ -8,6 +8,9 @@ from django.utils.text import slugify
 
 
 class Post(models.Model):
+    """
+    Blog post model
+    """
     author = models.ForeignKey(
         CustomUser, on_delete=models.SET_NULL, null=True
     )
@@ -33,5 +36,3 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
-
-    

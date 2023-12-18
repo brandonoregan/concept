@@ -6,17 +6,16 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
-
-
 @login_required
 def profile(request):
+
     # Check if the logged in user has a profile picture available
     if request.user.profile.profile_picture:
         profile_picture = request.user.profile.profile_picture
     else:
         profile_picture = None
 
+    # Check if the current_user has any post avaiable
     if Post.objects.filter(author=request.user).exists():
         user_posts = Post.objects.filter(author=request.user)
     else:
@@ -35,7 +34,6 @@ def profile(request):
 
 @login_required
 def edit_user(request):
-
     if request.method == "POST":
         edit_user_form = EditUserForm(request.POST, instance=request.user)
 
@@ -46,11 +44,13 @@ def edit_user(request):
             )
 
         return redirect(reverse("profile"))
-    
+
     else:
         form = EditUserForm(instance=request.user)
 
-        return render(request, "profiles/edit_user.html", context={"form": form})
+        return render(
+            request, "profiles/edit_user.html", context={"form": form}
+        )
 
 
 @login_required

@@ -1,8 +1,4 @@
 .registerContainer{
-    /* border: 2px solid black;
-    border-radius: 1rem;
-    box-shadow: 5px 2px 5px 2px;
-    margin: 1.5rem 3rem; */
     min-height: calc(100vh - 146px);
     background-color: var(--primary-blue);
     display: flex;
@@ -23,10 +19,6 @@
 }
 
 .leftCol {
-    /* background-color: var(--primary-blue);
-    min-height: 100%;
-    border-radius: 1rem 0 0 1rem;
-    position: relative; */
     align-self: center;
 }
 
@@ -73,7 +65,6 @@ input:hover {
 
 .submitButton {
     display: block;
-    /* margin-left: auto; */
     background-color: black;
     width: 100%;
     font-weight: 600;
@@ -83,13 +74,12 @@ input:hover {
     border: white;
 }
 
-/* Title over hero logo */
 .overlay-text {
     position: absolute;
-    top: 50%; /* Position the text at the vertical center */
-    left: 50%; /* Position the text at the horizontal center */
-    transform: translate(-50%, -35%); /* Center the text precisely */
-    z-index: 1; /* Ensure the text appears above the image */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -35%);
+    z-index: 1;
     font-weight: 900;
     font-size: 5rem;
     letter-spacing: 7px;
@@ -101,7 +91,6 @@ input:hover {
 /* media queries */
 /* media queries */
 
-/* Extra large devices (large desktops) */
 @media (max-width: 450px) {
 
     .rightCol {
