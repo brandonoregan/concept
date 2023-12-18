@@ -28,8 +28,8 @@
         {% include 'profiles/includes/profile_settings_form.html' %}
         <h2>{{ current_user.username }}</h2>
         <p class="aboutText">
-            {% if current_user.profile.bio %}
-                {{ current_user.profile.bio }}
+            {% if current_user.profile.short_bio %}
+                {{ current_user.profile.short_bio }}
             {% else %}
                 Update your profile picture, settings and short bio by clicking on the icons.
             {% endif %}</p>
