@@ -8,18 +8,12 @@ convoContainer.scrollTop = convoContainer.scrollHeight;
 convoContainer.lastElementChild.scrollIntoView(false);
 
 
+// Ensure 'enter' key submits message
 document.addEventListener('DOMContentLoaded', function() {
-    const messageTextarea = document.getElementById('messageTextarea');
-    const messageForm = document.getElementById('messageForm');
-
-    messageTextarea.addEventListener('keypress', function(event) {
-        // Check if Enter key is pressed (Enter key code is 13)
-        if (event.keyCode === 13 && !event.shiftKey) {
-            // Prevent default Enter key behavior (newline in textarea)
-            event.preventDefault();
-
-            // Trigger form submission when Enter is pressed
-            messageForm.submit();
+    document.getElementById('messageInput').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // Prevent default behavior (new line)
+            document.getElementById('messageForm').submit(); // Submit the form
         }
     });
 });

@@ -2,10 +2,6 @@ body {
     background-color: var(--primary-blue);
 }
 
-.mainContainer {
-    min-height: calc(100vh - 140px);
-}
-
 .rowContainer {
     display: flex;
     justify-content: center;
