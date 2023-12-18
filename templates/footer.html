@@ -3,7 +3,7 @@
 <div class="container-fluid p-4">
     <div class="row">
         <div class="col">
-            <div class="justify-content-center d-flex align-items-baseline">
+            <div class="justify-content-center d-flex align-items-baseline footerFlex">
                 <a href="
                 {% if user.is_authenticated %}
                     {% url 'post_home' %}
@@ -21,7 +21,7 @@
                     {% else %}
                         {% url 'welcome' %}
                     {% endif %}">CONCEPT</a>
-                    <p class="ms-3 ">Copyright &copy; 2023 Brandon O'Regan</p>
+                    <p class="ms-3 copyrightInfo ">Copyright &copy; 2023 Brandon O'Regan</p>
                 </div>
             </div>
         </div>

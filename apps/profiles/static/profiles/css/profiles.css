@@ -2,6 +2,10 @@ body {
     background-color: var(--primary-blue);
 }
 
+.mainContainer {
+    margin-bottom: 1.5rem;
+}
+
 .rowContainer {
     display: flex;
     justify-content: center;
