@@ -27,12 +27,8 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
+    
+    class Meta:
+        app_label = "apps.posts"
 
 
-class Comment(models.Model):
-    author = models.ForeignKey(
-        CustomUser, on_delete=models.SET_NULL, null=True
-    )
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    content = models.TextField()
-    post_date = models.DateTimeField(auto_now_add=True)
