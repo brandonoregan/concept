@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.posts.models import Post
+from .models import Post
 from django.utils.text import slugify
 
 

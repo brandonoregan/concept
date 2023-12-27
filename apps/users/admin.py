@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.users.models import CustomUser
+from .models import CustomUser
 
 
 class CustomUserAdmin(admin.ModelAdmin):

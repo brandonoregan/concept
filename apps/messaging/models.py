@@ -12,6 +12,9 @@ class Conversation(models.Model):
         return ", ".join(
             str(participant) for participant in self.participants.all()
         )
+    
+    class Meta:
+        app_label = "messaging"
 
 
 class Message(models.Model):
@@ -32,3 +35,4 @@ class Message(models.Model):
     # Provides a string representation of an object
     def __str__(self):
         return f"{self.sender} -> {self.receiver}: {self.text}"
+    

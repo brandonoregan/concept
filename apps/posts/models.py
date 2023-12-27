@@ -27,8 +27,9 @@ class Post(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
-    
+
     class Meta:
-        app_label = "apps.posts"
+        app_label = "posts"
+    
 
 

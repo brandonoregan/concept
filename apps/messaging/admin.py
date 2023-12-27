@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.messaging.models import Conversation, Message
+from .models import Conversation, Message
 
 
 class ConversationAdmin(admin.ModelAdmin):

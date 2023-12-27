@@ -10,3 +10,4 @@ class CustomUser(AbstractUser):
 
     class Meta:
         managed = True
+        app_label = 'users'
